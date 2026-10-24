@@ -2,7 +2,7 @@
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 document.documentElement.classList.add('js');
 // Paste your Google Apps Script Web app URL here (see the setup steps)
-const ENDPOINT = 'https://vnhs-registrar.github.io/registrar-site/';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby1SIQHixCq1fJVodbcekZVC15r-GHJMYR8aryU1QMQK_LP2GeRuWJkvxgegRaxsZC3/exec';
 const useGoogle = !ENDPOINT.includes('PASTE_');
 const form = $('#f'), esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const today = new Date(); today.setHours(0, 0, 0, 0); const Y = today.getFullYear();
