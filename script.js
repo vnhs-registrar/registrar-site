@@ -16,6 +16,13 @@ $$('[inputmode=numeric]').forEach(i => i.addEventListener('input', () => i.value
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold: .1});
 $$('.rv').forEach(el => io.observe(el));
 
+// Phone menu
+const nav = $('nav'), burger = $('.burger');
+const menu = o => { nav.classList.toggle('menu-open', o); burger.setAttribute('aria-expanded', o); };
+burger.addEventListener('click', () => menu(!nav.classList.contains('menu-open')));
+$$('nav li a').forEach(a => a.addEventListener('click', () => menu(false)));
+document.addEventListener('click', e => { if (!e.target.closest('nav')) menu(false); });
+
 // Copies stepper (1 to 5)
 $$('.stepper button').forEach(b => b.addEventListener('click', () => {
   const i = b.parentElement.querySelector('input'); i.value = Math.min(5, Math.max(1, +i.value + +b.dataset.s));

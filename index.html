@@ -6,7 +6,9 @@
 <title>Office of the SHS Registrar | Valencia National High School</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap"></noscript>
+<meta name="theme-color" content="#0b93d6">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,13 +17,14 @@
 <span><a href="#requirements">Requirements</a><a href="#faq">FAQs</a><a href="#contact">Contact Us</a></span></div></div>
 
 <nav><div>
-  <a class="brand" href="#top"><img src="logo.png" alt="" onerror="this.remove()"><span>VNHS REGISTRAR</span></a>
+  <a class="brand" href="#top"><img src="logo.png" alt="" width="42" height="42" decoding="async" onerror="this.remove()"><span>VNHS REGISTRAR</span></a>
   <ul><li><a href="#top">Home</a></li><li><a href="#request">Request Form</a></li><li><a href="#track">Track Request</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#faq">FAQs</a></li><li><a href="#contact">Contact Us</a></li></ul>
+  <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
 </div></nav>
 
 <header class="hero" id="top"><div class="hero-in">
   <!-- Put your school logo in this folder as logo.png -->
-  <img src="logo.png" alt="Valencia National High School seal" onerror="this.remove()">
+  <img src="logo.png" alt="Valencia National High School seal" width="120" height="120" fetchpriority="high" decoding="async" onerror="this.remove()">
   <div>
     <small>Valencia National High School</small>
     <h1>OFFICE OF THE SHS REGISTRAR <span>Online Request</span></h1>
@@ -44,7 +47,7 @@
   </div>
 
   <form id="f" action="https://api.web3forms.com/submit" method="POST">
-    <input type="hidden" name="access_key" value="42bca127-ccda-49e5-96b6-e91e1b61227d">
+    <input type="hidden" name="access_key" value="PASTE_YOUR_ACCESS_KEY_HERE">
     <input type="hidden" name="subject" value="New Registrar Request">
 
     <fieldset><legend><b>1</b>Student information</legend>
@@ -195,6 +198,6 @@
   </div>
 </div></div>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 </body>
 </html>
