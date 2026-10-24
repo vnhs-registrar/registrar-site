@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Office of the SHS Registrar | Valencia National High School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top"><div><span>Valencia National High School &middot; Senior High School</span>
+<span><a href="#requirements">Requirements</a><a href="#faq">FAQs</a><a href="#contact">Contact Us</a></span></div></div>
+
+<nav><div>
+  <a class="brand" href="#top"><img src="logo.png" alt="" onerror="this.remove()"><span>VNHS REGISTRAR</span></a>
+  <ul><li><a href="#top">Home</a></li><li><a href="#request">Request Form</a></li><li><a href="#track">Track Request</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#faq">FAQs</a></li><li><a href="#contact">Contact Us</a></li></ul>
+</div></nav>
+
+<header class="hero" id="top"><div class="hero-in">
+  <!-- Put your school logo in this folder as logo.png -->
+  <img src="logo.png" alt="Valencia National High School seal" onerror="this.remove()">
+  <div>
+    <small>Valencia National High School</small>
+    <h1>OFFICE OF THE SHS REGISTRAR <span>Online Request</span></h1>
+    <p>Request your permanent record, certifications, and diploma copies without lining up at the office.</p>
+  </div>
+</div></header>
+
+<section class="steps">
+  <div class="step rv"><b>1</b><p style="margin:0"><strong>Fill out the form</strong><span>Enter your details and choose the record you need.</span></p></div>
+  <div class="step rv"><b>2</b><p style="margin:0"><strong>Review and submit</strong><span>Check everything before it is sent.</span></p></div>
+  <div class="step rv"><b>3</b><p style="margin:0"><strong>Track your request</strong><span>Use your reference number to follow its status.</span></p></div>
+</section>
+
+<div class="wrap">
+<main class="card rv" id="request">
+  <div class="fhead">
+    <h2>Request Form</h2>
+    <p class="legend"><span class="req">*</span> Required field</p>
+    <div class="bar"><i id="bar"></i></div><span id="pc">0% complete</span>
+  </div>
+
+  <form id="f" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="42bca127-ccda-49e5-96b6-e91e1b61227d">
+    <input type="hidden" name="subject" value="New Registrar Request">
+
+    <fieldset><legend><b>1</b>Student information</legend>
+      <div class="g">
+        <div class="f s6"><label class="l">Name of student <span class="req">*</span></label>
+          <input class="in" name="Student Name" placeholder="Ex. Last name, First name, Middle name" required></div>
+        <div class="f s2"><label class="l">LRN <span class="req">*</span></label>
+          <input class="in" name="LRN" inputmode="numeric" maxlength="12" pattern="[0-9]{12}" title="12-digit LRN" placeholder="Ex. 123456789012" required></div>
+        <div class="f s2"><label class="l">Track / Strand <span class="req">*</span></label>
+          <input class="in" name="Track/Strand" placeholder="Ex. STEM" required></div>
+        <div class="f s2"><label class="l">Grade level <span class="req">*</span></label>
+          <select class="in" name="Grade Level" required><option value="">Select</option><option>Grade 11</option><option>Grade 12</option></select></div>
+        <div class="f s2"><label class="l">Section <span class="req">*</span></label>
+          <input class="in" name="Section" placeholder="Ex. Section name" required></div>
+        <div class="f s2"><label class="l">Adviser <span class="req">*</span></label>
+          <input class="in" name="Adviser" placeholder="Ex. Adviser's full name" required></div>
+        <div class="f s2"><label class="l">School year <span class="req">*</span></label>
+          <select class="in" id="sy" name="School Year" required><option value="">Select</option></select></div>
+        <div class="f s3 dp" data-dp="birth" data-req><label class="l">Birthdate <span class="req">*</span></label><input class="in" name="Birthdate" placeholder="Select birthdate" readonly autocomplete="off" required><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><div class="cal"></div><small class="err"></small></div>
+        <div class="f s3"><label class="l">Year of graduation <span class="req">*</span></label>
+          <select class="in" id="gy" name="Year of Graduation" required><option value="">Select</option></select></div>
+      </div>
+    </fieldset>
+
+    <fieldset><legend><b>2</b>Contact details</legend>
+      <div class="g">
+        <div class="f s2"><label class="l">Contact no. <span class="req">*</span></label>
+          <input class="in" type="tel" name="Contact No" inputmode="numeric" maxlength="11" pattern="09[0-9]{9}" title="11-digit mobile number starting with 09" placeholder="Ex. 09876543219" required></div>
+        <div class="f s2"><label class="l">Email address <span class="req">*</span></label>
+          <input class="in" type="email" name="email" placeholder="Ex. name@email.com" required></div>
+        <div class="f s2 dp" data-dp="request" data-req><label class="l">Date requested <span class="req">*</span></label><input class="in" name="Date Requested" placeholder="Select date" readonly autocomplete="off" required><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><div class="cal"></div><small class="err"></small></div>
+      </div>
+    </fieldset>
+
+    <fieldset><legend><b>3</b>Requester</legend>
+      <label class="l" style="margin-top:14px">Who is making this request? <span class="req">*</span></label>
+      <div class="opts two" style="margin-top:0">
+        <label class="opt"><input type="radio" name="Requester" value="The student" required>The student (myself)</label>
+        <label class="opt"><input type="radio" name="Requester" value="A representative">A representative of the student</label>
+      </div>
+      <div class="more" id="m-rep"><div>
+        <div class="g">
+          <div class="f"><label class="l">Representative's full name <span class="req">*</span></label>
+            <input class="in" name="Representative Name" placeholder="Ex. Full name" disabled></div>
+          <div class="f"><label class="l">Relationship to student <span class="req">*</span></label>
+            <select class="in" name="Relationship" disabled><option value="">Select</option><option>Parent</option><option>Guardian</option><option>Sibling</option><option>Other relative</option><option>Other</option></select></div>
+        </div>
+        <p class="hint">A representative must bring an authorization letter signed by the student and a valid ID. Please confirm other requirements with the Registrar's Office.</p>
+      </div></div>
+    </fieldset>
+
+    <fieldset><legend><b>4</b>Request details</legend>
+      <label class="l" style="margin-top:14px">Request for <span class="req">*</span></label>
+      <div class="opts" style="margin-top:0">
+        <label class="opt"><input type="radio" name="Request For" value="SF10/Form 137A (Permanent Record)" required>SF10/Form 137A (Permanent Record)</label>
+        <label class="opt"><input type="radio" name="Request For" value="Certification">Certification</label>
+        <label class="opt"><input type="radio" name="Request For" value="Second Issuance of Diploma">Second Issuance of Diploma</label>
+      </div>
+      <div class="more" id="m-cert"><div><div class="f s6"><label class="l">Type of certification <span class="req">*</span></label>
+        <input class="in" name="Certification Type" placeholder="Ex. Certificate of Enrollment" disabled></div></div></div>
+
+      <div class="g"><div class="f s6"><label class="l">Purpose <span class="req">*</span></label>
+        <select class="in" name="Purpose" required>
+          <option value="">Select purpose</option>
+          <option>Passport/VISA Application</option>
+          <option>Late Registration/Correction of Entry in the Certificate of Live Birth</option>
+          <option>Scholarship Application</option>
+          <option>Local/Overseas Employment</option>
+          <option>PMA/PNPA Examination, AFPSAT, Philippine Navy Training</option>
+          <option>Enrollment/Evaluation (College Application)</option>
+          <option>Others</option>
+        </select></div></div>
+      <div class="more" id="m-oth"><div><div class="f s6"><label class="l">Please specify <span class="req">*</span></label>
+        <input class="in" name="Other Purpose" placeholder="Ex. State your purpose" disabled></div></div></div>
+
+      <div class="g">
+        <div class="f s2"><label class="l">Number of copies</label>
+          <div class="stepper"><button type="button" data-s="-1" aria-label="Fewer copies">&minus;</button><input class="in" name="Copies" value="1" readonly aria-label="Number of copies"><button type="button" data-s="1" aria-label="More copies">+</button></div></div>
+        <div class="f s4"><label class="l">How will the document be claimed? <span class="req">*</span></label>
+          <select class="in" name="Claim Method" required><option value="">Select</option><option>Pick up in person</option><option>Claim through an authorized representative</option><option>Other arrangement (to be discussed with the registrar)</option></select></div>
+        <div class="f s3 dp" data-dp="claim"><label class="l">Preferred claim date (optional)</label><input class="in" name="Preferred Claim Date" placeholder="Select date" readonly autocomplete="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><div class="cal"></div><small class="err"></small></div>
+      </div>
+      <div class="more" id="m-claim"><div><p class="hint">Bring an authorization letter and a valid ID of the person who will claim the document. Other arrangements are subject to approval by the Registrar's Office.</p></div></div>
+    </fieldset>
+
+    <label class="consent"><input type="checkbox" name="Privacy Consent" value="Agreed" required>
+      <span><span class="req">*</span> I certify that the information provided is true and correct, and I consent to its collection and use for processing this request in accordance with the Data Privacy Act of 2012 (RA 10173).</span></label>
+
+    <div class="acts"><button class="btn main" type="submit">Review request</button><button class="btn ghost" type="reset">Clear form</button></div>
+  </form>
+</main>
+
+<aside class="side">
+  <div class="box rv" id="requirements"><h3>Requirements</h3><ol>
+    <li><strong>Affidavit of Loss</strong> for (a) Second Issuance of Diploma; (b) SF10/Form 137A for enrollment purposes, in case of lost Report Card.</li>
+    <li><strong>Photocopy of No Record of Birth</strong> issued by PSA, for Late Registration of Birth.</li></ol></div>
+  <div class="box rv"><h3>Reminders</h3><ul>
+    <li>Use your complete name as it appears in school records.</li>
+    <li>Keep your mobile number and email active.</li>
+    <li>Bring a valid school ID when claiming your document.</li></ul></div>
+</aside>
+</div>
+
+<section class="track rv" id="track"><div class="card tcard">
+  <h2>Track Your Request</h2>
+  <p class="faq-sub">Enter the reference number you received after submitting.</p>
+  <form id="trk" class="trow"><input class="in" id="tref" placeholder="Ex. VNHS-261023-AB12CD" autocomplete="off" required><button class="btn" type="submit">Track</button></form>
+  <div id="tres" aria-live="polite"></div>
+</div></section>
+
+<section class="faq rv" id="faq"><h2>Frequently Asked Questions</h2>
+  <p class="faq-sub">Select a question to see the answer.</p>
+  <div class="fq-grid">
+    <div><button class="fq" type="button"><b>1</b><span>Which documents can I request?</span><i>&rarr;</i></button>
+      <div class="fa">The SF10/Form 137A (Permanent Record), Certification, and Second Issuance of Diploma.</div></div>
+    <div><button class="fq" type="button"><b>2</b><span>Do I need to submit other documents?</span><i>&rarr;</i></button>
+      <div class="fa">Only in some cases: an Affidavit of Loss, or a PSA No Record of Birth photocopy for late registration. See the Requirements box.</div></div>
+    <div><button class="fq" type="button"><b>3</b><span>How will I know when my request is ready?</span><i>&rarr;</i></button>
+      <div class="fa">The Registrar's Office will contact you through the mobile number and email you provide.</div></div>
+    <div><button class="fq" type="button"><b>4</b><span>Can I change my answers after submitting?</span><i>&rarr;</i></button>
+      <div class="fa">You review everything before it is sent. After that, please contact the Registrar's Office to correct any entry.</div></div>
+  </div>
+</section>
+
+<div class="ov" id="fov"><div class="dlg fdlg" role="dialog" aria-modal="true" aria-labelledby="fqt">
+  <button class="x" type="button" id="fx" aria-label="Close">&times;</button>
+  <small id="fqn"></small><h3 id="fqt"></h3><p id="fqa"></p>
+  <div class="dact"><button class="btn" type="button" id="fclose">Got it</button></div>
+</div></div>
+
+<footer class="foot" id="contact"><div>
+  <p style="margin:0"><strong>Valencia National High School</strong>Office of the SHS Registrar<br>Visit the office during school hours for assistance.</p>
+  <p style="margin:0">Senior High School Department<br>&copy; <span id="yr"></span> VNHS. All rights reserved.</p>
+</div></footer>
+
+<div class="ov" id="ov"><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dt">
+  <div id="rv"><h3 id="dt">Review your request</h3>
+    <p>Please check that everything is correct before submitting.</p>
+    <dl id="rl"></dl><p id="em"></p>
+    <div class="dact"><button class="btn ghost" type="button" id="back">Go back and edit</button><button class="btn" type="button" id="ok">Confirm and submit</button></div></div>
+  <div id="done" hidden>
+    <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/><path d="M14 27l8 8 16-17"/></svg>
+    <h3>Request submitted</h3>
+    <p style="margin:0;color:var(--mut);font-size:13px">Keep your reference number for follow-ups.</p>
+    <div class="refno" id="ref"></div>
+    <p style="margin:0;color:var(--mut);font-size:13px">The Registrar's Office will contact you using your details.</p>
+    <div class="dact" style="justify-content:center"><button class="btn ghost" type="button" id="copy">Copy reference no.</button><button class="btn ghost" type="button" id="gotrack">Track request</button><button class="btn" type="button" id="fin">Done</button></div>
+  </div>
+</div></div>
+
+<script src="script.js"></script>
+</body>
+</html>
