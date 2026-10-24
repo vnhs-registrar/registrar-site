@@ -2,7 +2,7 @@
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 document.documentElement.classList.add('js');
 // Paste your Google Apps Script Web app URL here to turn on the styled emails and request tracking
-const ENDPOINT = 'PASTE_YOUR_WEB_APP_URL_HERE';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNzG6beQZPk-Z1lbhEh9cYkabzbz5Gnl2SUyRTpGzPu7iz5vspn9uqJKkQKBEhKw3S/exec';
 const useGoogle = !ENDPOINT.includes('PASTE_');
 const form = $('#f'), esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const today = new Date(); today.setHours(0, 0, 0, 0); const Y = today.getFullYear();
