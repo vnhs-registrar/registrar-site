@@ -220,3 +220,5 @@ nav.menu-open .burger span:after{transform:translateY(-6px) rotate(-45deg)}
   .cal.open{bottom:14px}
   .cg .d{font-size:14px}
 }
+
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}

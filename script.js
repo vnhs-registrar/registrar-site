@@ -1,8 +1,8 @@
 (() => {
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 document.documentElement.classList.add('js');
-// Paste your Google Apps Script Web app URL here to turn on the styled emails and request tracking
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxNzG6beQZPk-Z1lbhEh9cYkabzbz5Gnl2SUyRTpGzPu7iz5vspn9uqJKkQKBEhKw3S/exec';
+// Paste your Google Apps Script Web app URL here (see the setup steps)
+const ENDPOINT = 'https://vnhs-registrar.github.io/registrar-site/';
 const useGoogle = !ENDPOINT.includes('PASTE_');
 const form = $('#f'), esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const today = new Date(); today.setHours(0, 0, 0, 0); const Y = today.getFullYear();
@@ -117,7 +117,7 @@ form.addEventListener('submit', e => {
   if (!form.reportValidity()) return;
   const miss = pickers.filter(p => p.req && !p.i.value);
   if (miss.length) { miss.forEach(p => p.er.textContent = 'Please select a date.'); miss[0].i.scrollIntoView({block: 'center'}); return; }
-  $('#rl').innerHTML = [...new FormData(form)].filter(([k, v]) => k != 'access_key' && k != 'subject' && v !== '')
+  $('#rl').innerHTML = [...new FormData(form)].filter(([k, v]) => k != 'Website' && v !== '')
     .map(([k, v]) => `<div><dt>${k == 'email' ? 'Email' : esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
   $('#em').textContent = ''; $('#rv').hidden = false; $('#done').hidden = true; show(true);
 });
@@ -126,20 +126,14 @@ ov.addEventListener('click', e => { if (e.target == ov && !$('#rv').hidden) show
 document.addEventListener('keydown', e => { if (e.key == 'Escape') { $$('.cal.open').forEach(c => c.classList.remove('open')); faq(false); if (!$('#rv').hidden) show(false); } });
 
 $('#ok').onclick = async () => {
-  const b = $('#ok'), fd = new FormData(form);
-  const rnd = crypto.getRandomValues(new Uint32Array(1))[0].toString(36).toUpperCase().padStart(6, '0').slice(0, 6);
-  const ref = 'VNHS-' + new Date().toISOString().slice(2, 10).replace(/-/g, '') + '-' + rnd;
-  fd.append('Reference No', ref); b.disabled = true; b.classList.add('load'); $('#em').textContent = '';
+  const b = $('#ok'); $('#em').textContent = '';
+  if (!useGoogle) { $('#em').textContent = "The registrar's system is not connected yet. Please try again later."; return; }
+  const data = Object.fromEntries(new FormData(form)); Object.keys(data).forEach(k => data[k] === '' && delete data[k]);
+  b.disabled = true; b.classList.add('load');
   try {
-    let r;
-    if (!useGoogle) r = await fetch(form.action, {method: 'POST', body: fd, headers: {Accept: 'application/json'}});
-    else {
-      const data = Object.fromEntries(fd); ['access_key', 'subject'].forEach(k => delete data[k]);
-      Object.keys(data).forEach(k => data[k] === '' && delete data[k]);
-      r = await fetch(ENDPOINT, {method: 'POST', body: JSON.stringify(data)});
-    }
-    const j = await r.json(); if (!j.success) throw new Error(j.message || 'Submission failed');
-    $('#ref').textContent = ref; $('#rv').hidden = true; $('#done').hidden = false;
+    const j = await (await fetch(ENDPOINT, {method: 'POST', body: JSON.stringify(data)})).json();
+    if (!j.success || !j.ref) throw new Error(j.message || 'Submission failed');
+    $('#ref').textContent = j.ref; $('#rv').hidden = true; $('#done').hidden = false;
   } catch (err) { $('#em').textContent = 'Could not send your request: ' + err.message + '. Please try again.'; }
   b.disabled = false; b.classList.remove('load');
 };
@@ -170,5 +164,6 @@ $('#trk').addEventListener('submit', async e => {
   } catch (err) { out.innerHTML = '<p class="tmsg bad">Could not check the status. Please try again.</p>'; }
   b.disabled = false; b.classList.remove('load');
 });
+$('#tref').addEventListener('input', e => { const t = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8); e.target.value = t.length > 4 ? t.slice(0, 4) + '-' + t.slice(4) : t; });
 sync();
 })();

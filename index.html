@@ -48,9 +48,8 @@
     <div class="bar"><i id="bar"></i></div><span id="pc">0% complete</span>
   </div>
 
-  <form id="f" action="https://api.web3forms.com/submit" method="POST">
-    <input type="hidden" name="access_key" value="PASTE_YOUR_ACCESS_KEY_HERE">
-    <input type="hidden" name="subject" value="New Registrar Request">
+  <form id="f">
+    <input class="hp" type="text" name="Website" tabindex="-1" autocomplete="off" aria-hidden="true">
 
     <fieldset><legend><b>1</b>Student information</legend>
       <div class="g">
@@ -156,7 +155,7 @@
 <section class="track rv" id="track"><div class="card tcard">
   <h2>Track Your Request</h2>
   <p class="faq-sub">Enter the reference number you received after submitting.</p>
-  <form id="trk" class="trow"><input class="in" id="tref" placeholder="Ex. VNHS-261023-AB12CD" autocomplete="off" required><button class="btn" type="submit">Track</button></form>
+  <form id="trk" class="trow"><input class="in" id="tref" placeholder="Ex. K7M2-X9QF" maxlength="9" autocomplete="off" required><button class="btn" type="submit">Track</button></form>
   <div id="tres" aria-live="polite"></div>
 </div></section>
 
