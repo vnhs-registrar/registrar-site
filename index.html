@@ -68,7 +68,7 @@
           <input class="in" name="Adviser" placeholder="Ex. Adviser's full name" required></div>
         <div class="f s2"><label class="l">School year <span class="req">*</span></label>
           <select class="in" id="sy" name="School Year" required><option value="">Select</option></select></div>
-        <div class="f s3 dp" data-dp="birth" data-req><label class="l">Birthdate <span class="req">*</span></label><input class="in" name="Birthdate" placeholder="Select birthdate" readonly autocomplete="off" required><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><div class="cal"></div><small class="err"></small></div>
+        
         <div class="f s3"><label class="l">Year of graduation <span class="req">*</span></label>
           <select class="in" id="gy" name="Year of Graduation" required><option value="">Select</option></select></div>
       </div>
@@ -76,11 +76,11 @@
 
     <fieldset><legend><b>2</b>Contact details</legend>
       <div class="g">
-        <div class="f s2"><label class="l">Contact no. <span class="req">*</span></label>
+        <div class="f s3"><label class="l">Contact no. <span class="req">*</span></label>
           <input class="in" type="tel" name="Contact No" inputmode="numeric" maxlength="11" pattern="09[0-9]{9}" title="11-digit mobile number starting with 09" placeholder="Ex. 09876543219" required></div>
-        <div class="f s2"><label class="l">Email address <span class="req">*</span></label>
+        <div class="f s3"><label class="l">Email address <span class="req">*</span></label>
           <input class="in" type="email" name="email" placeholder="Ex. name@email.com" required></div>
-        <div class="f s2 dp" data-dp="request" data-req><label class="l">Date requested <span class="req">*</span></label><input class="in" name="Date Requested" placeholder="Select date" readonly autocomplete="off" required><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><div class="cal"></div><small class="err"></small></div>
+        
       </div>
     </fieldset>
 
@@ -136,7 +136,7 @@
     </fieldset>
 
     <label class="consent"><input type="checkbox" name="Privacy Consent" value="Agreed" required>
-      <span><span class="req">*</span> I certify that the information provided is true and correct, and I consent to its collection and use for processing this request in accordance with the Data Privacy Act of 2012 (RA 10173).</span></label>
+      <span><span class="req">*</span> I certify that the information provided is true and correct, and I consent to its collection and use for processing this request in accordance with the Data Privacy Act of 2012 (RA 10173). My details are kept only to process this request and are erased about 30 days after my document is released (180 days if the request is never completed).</span></label>
 
     <div class="acts"><button class="btn main" type="submit">Review request</button><button class="btn ghost" type="reset">Clear form</button></div>
   </form>
@@ -171,6 +171,8 @@
       <div class="fa">The Registrar's Office will contact you through the mobile number and email you provide.</div></div>
     <div><button class="fq" type="button"><b>4</b><span>Can I change my answers after submitting?</span><i>&rarr;</i></button>
       <div class="fa">You review everything before it is sent. After that, please contact the Registrar's Office to correct any entry.</div></div>
+    <div><button class="fq" type="button"><b>5</b><span>How long are my details kept?</span><i>&rarr;</i></button>
+      <div class="fa">Your details are used only to process this request. They are erased about 30 days after your document is released, or after 180 days if the request is never completed.</div></div>
   </div>
 </section>
 
