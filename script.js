@@ -2,7 +2,7 @@
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 document.documentElement.classList.add('js');
 // Paste your Google Apps Script Web app URL here (see the setup steps)
-const ENDPOINT = 'PASTE_YOUR_WEB_APP_URL_HERE';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby1SIQHixCq1fJVodbcekZVC15r-GHJMYR8aryU1QMQK_LP2GeRuWJkvxgegRaxsZC3/exec';
 const useGoogle = !ENDPOINT.includes('PASTE_');
 const form = $('#f'), esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const tidy = t => { t = (t || '').trim().replace(/\s+/g, ' '); return (t === t.toUpperCase() || t === t.toLowerCase()) ? t.toLowerCase().replace(/(^|[\s-])([a-z])/g, (m, a, c) => a + c.toUpperCase()) : t; };
