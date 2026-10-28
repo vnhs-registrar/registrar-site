@@ -2,14 +2,14 @@
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 document.documentElement.classList.add('js');
 // Paste your Google Apps Script Web app URL here (see the setup steps)
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycby1SIQHixCq1fJVodbcekZVC15r-GHJMYR8aryU1QMQK_LP2GeRuWJkvxgegRaxsZC3/exec';
+const ENDPOINT = 'PASTE_YOUR_WEB_APP_URL_HERE';
 const useGoogle = !ENDPOINT.includes('PASTE_');
 const form = $('#f'), esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tidy = t => { t = (t || '').trim().replace(/\s+/g, ' '); return (t === t.toUpperCase() || t === t.toLowerCase()) ? t.toLowerCase().replace(/(^|[\s-])([a-z])/g, (m, a, c) => a + c.toUpperCase()) : t; };
 const today = new Date(); today.setHours(0, 0, 0, 0); const Y = today.getFullYear();
 
 // Dropdown years: school year 2026-2027 to 2034-2035 (change 2034 to extend)
 for (let y = 2026; y <= 2034; y++) $('#sy').add(new Option(`${y}-${y + 1}`, `${y}-${y + 1}`));
-for (let y = Y + 2; y >= Y - 15; y--) $('#gy').add(new Option(y, y));
 $('#yr').textContent = Y;
 
 $$('[inputmode=numeric]').forEach(i => i.addEventListener('input', () => i.value = i.value.replace(/\D/g, '')));
@@ -109,6 +109,18 @@ $$('.fq').forEach((b, i, all) => b.addEventListener('click', () => {
 $('#fclose').onclick = $('#fx').onclick = () => faq(false);
 fov.addEventListener('click', e => { if (e.target == fov) faq(false); });
 
+// Data privacy notice window (opens when the box is ticked)
+const pov = $('#pov'), pb = $('#pbody'), cb = form.elements['Privacy Consent'];
+let consent = false;
+const atEnd = () => { $('#pagree').disabled = pb.scrollHeight - pb.scrollTop - pb.clientHeight > 12; };
+const privacy = on => { pov.classList.toggle('open', on); document.body.style.overflow = on ? 'hidden' : ''; if (on) { pb.scrollTop = 0; atEnd(); pb.focus(); } };
+pb.addEventListener('scroll', atEnd);
+cb.addEventListener('change', () => { if (cb.checked && !consent) { cb.checked = false; privacy(true); } else if (!cb.checked) consent = false; });
+$$('.plink').forEach(a => a.addEventListener('click', e => { e.preventDefault(); privacy(true); }));
+$('#pagree').onclick = () => { consent = true; cb.checked = true; privacy(false); cb.dispatchEvent(new Event('input', {bubbles: true})); };
+$('#pdecline').onclick = $('#px').onclick = () => privacy(false);
+pov.addEventListener('click', e => { if (e.target == pov) privacy(false); });
+
 // Review window
 const ov = $('#ov');
 const show = on => { ov.classList.toggle('open', on); document.body.style.overflow = on ? 'hidden' : ''; if (on) $('#ok').focus(); };
@@ -123,12 +135,16 @@ form.addEventListener('submit', e => {
 });
 $('#back').onclick = () => show(false);
 ov.addEventListener('click', e => { if (e.target == ov && !$('#rv').hidden) show(false); });
-document.addEventListener('keydown', e => { if (e.key == 'Escape') { $$('.cal.open').forEach(c => c.classList.remove('open')); faq(false); if (!$('#rv').hidden) show(false); } });
+document.addEventListener('keydown', e => { if (e.key == 'Escape') { $$('.cal.open').forEach(c => c.classList.remove('open')); faq(false); privacy(false); if (!$('#rv').hidden) show(false); } });
 
 $('#ok').onclick = async () => {
   const b = $('#ok'); $('#em').textContent = '';
   if (!useGoogle) { $('#em').textContent = "The registrar's system is not connected yet. Please try again later."; return; }
-  const data = Object.fromEntries(new FormData(form)); Object.keys(data).forEach(k => data[k] === '' && delete data[k]);
+  const data = Object.fromEntries(new FormData(form));
+  const fn = tidy(data['First Name']), mn = tidy(data['Middle Name']), ln = tidy(data['Last Name']);
+  data['Student Name'] = ln + ', ' + fn + (mn ? ' ' + mn : '');
+  ['First Name', 'Middle Name', 'Last Name'].forEach(k => delete data[k]);
+  Object.keys(data).forEach(k => data[k] === '' && delete data[k]);
   b.disabled = true; b.classList.add('load');
   try {
     const j = await (await fetch(ENDPOINT, {method: 'POST', body: JSON.stringify(data)})).json();
@@ -141,7 +157,7 @@ const finish = () => { show(false); form.reset(); form.classList.remove('tried')
 $('#copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('#ref').textContent); $('#copy').textContent = 'Copied!'; };
 $('#fin').onclick = () => { finish(); scrollTo({top: 0, behavior: 'smooth'}); };
 $('#gotrack').onclick = () => { $('#tref').value = $('#ref').textContent; finish(); $('#track').scrollIntoView({behavior: 'smooth'}); };
-form.addEventListener('reset', () => { pickers.forEach(p => p.v = null); setTimeout(sync); });
+form.addEventListener('reset', () => { pickers.forEach(p => p.v = null); consent = false; setTimeout(sync); });
 
 // Request tracking
 const STEPS = ['Received', 'Processing', 'Ready for pick-up', 'Released'];

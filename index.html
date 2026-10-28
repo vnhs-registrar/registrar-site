@@ -15,8 +15,7 @@
 </head>
 <body>
 
-<div class="top"><div><span>Valencia National High School &middot; Senior High School</span>
-<span><a href="#requirements">Requirements</a><a href="#faq">FAQs</a><a href="#contact">Contact Us</a></span></div></div>
+<div class="top"><div><span>Valencia National High School &middot; Senior High School</span></div></div>
 
 <nav><div>
   <a class="brand" href="#top"><img src="logo.png" alt="" width="42" height="42" decoding="async" onerror="this.remove()"><span>VNHS REGISTRAR</span></a>
@@ -53,8 +52,12 @@
 
     <fieldset><legend><b>1</b>Student information</legend>
       <div class="g">
-        <div class="f s6"><label class="l">Name of student <span class="req">*</span></label>
-          <input class="in" name="Student Name" placeholder="Ex. Last name, First name, Middle name" required></div>
+        <div class="f s2"><label class="l">First name <span class="req">*</span></label>
+          <input class="in" name="First Name" placeholder="Ex. Juan" autocomplete="given-name" required></div>
+        <div class="f s2"><label class="l">Middle name (if any)</label>
+          <input class="in" name="Middle Name" placeholder="Ex. Santos" autocomplete="additional-name"></div>
+        <div class="f s2"><label class="l">Last name <span class="req">*</span></label>
+          <input class="in" name="Last Name" placeholder="Ex. Dela Cruz" autocomplete="family-name" required></div>
         <div class="f s2"><label class="l">LRN <span class="req">*</span></label>
           <input class="in" name="LRN" inputmode="numeric" maxlength="12" pattern="[0-9]{12}" title="12-digit LRN" placeholder="Ex. 123456789012" required></div>
         <div class="f s2"><label class="l">Track / Strand <span class="req">*</span></label>
@@ -67,9 +70,6 @@
           <input class="in" name="Adviser" placeholder="Ex. Adviser's full name" required></div>
         <div class="f s2"><label class="l">School year <span class="req">*</span></label>
           <select class="in" id="sy" name="School Year" required><option value="">Select</option></select></div>
-        
-        <div class="f s3"><label class="l">Year of graduation <span class="req">*</span></label>
-          <select class="in" id="gy" name="Year of Graduation" required><option value="">Select</option></select></div>
       </div>
     </fieldset>
 
@@ -135,7 +135,7 @@
     </fieldset>
 
     <label class="consent"><input type="checkbox" name="Privacy Consent" value="Agreed" required>
-      <span><span class="req">*</span> I certify that the information provided is true and correct, and I consent to its collection and use for processing this request in accordance with the Data Privacy Act of 2012 (RA 10173). My details are kept only to process this request and are erased about 30 days after my document is released (180 days if the request is never completed).</span></label>
+      <span><span class="req">*</span> I certify that the information provided is true and correct, and I have read and agree to the <a class="plink" href="#">Data Privacy Notice</a> (Data Privacy Act of 2012, RA 10173).</span></label>
 
     <div class="acts"><button class="btn main" type="submit">Review request</button><button class="btn ghost" type="reset">Clear form</button></div>
   </form>
@@ -174,6 +174,37 @@
       <div class="fa">Your details are used only to process this request. They are erased about 30 days after your document is released, or after 180 days if the request is never completed.</div></div>
   </div>
 </section>
+
+<!-- DATA PRIVACY NOTICE: a template. The school's Data Protection Officer should review it. Keep the retention days (30 and 180) the same as in Code.gs. -->
+<div class="ov" id="pov"><div class="dlg pdlg" role="dialog" aria-modal="true" aria-labelledby="pt">
+  <button class="x" type="button" id="px" aria-label="Close">&times;</button>
+  <small>Valencia National High School &middot; Office of the SHS Registrar</small>
+  <h3 id="pt">Data Privacy Notice</h3>
+  <p class="phint">Please read the notice below. The I Agree button turns on when you reach the end.</p>
+  <div id="pbody" tabindex="0">
+    <h4>1. Who we are</h4>
+    <p>This notice is issued by Valencia National High School, through the Office of the SHS Registrar (&ldquo;the School&rdquo;), which operates this online request form.</p>
+    <h4>2. What information we collect</h4>
+    <p>To process your request, we collect your full name; Learner Reference Number (LRN); track or strand, grade level, section, adviser, and school year; your mobile number and email address; whether you or a representative is making the request, and the representative&rsquo;s name and relationship to you, if any; and the document you are requesting, its purpose, the number of copies, and how it will be claimed. The system also records the date and time of your request and gives it a reference number.</p>
+    <h4>3. Why we collect it</h4>
+    <ul><li>To process your request for an SF10/Form 137A, a certification, or a second issuance of diploma.</li><li>To check your identity against school records.</li><li>To contact you about your request.</li><li>To let you track the status of your request.</li><li>To prepare the document for claiming.</li></ul>
+    <h4>4. Legal basis</h4>
+    <p>We process your information based on your consent, which you give by ticking the box on the form, and because the School needs it to carry out its work of keeping and releasing student records.</p>
+    <h4>5. Who can see it</h4>
+    <p>Only authorized staff of the Registrar&rsquo;s Office can see your full request details. Anyone who has your reference number can see only the status, the type of request, and any note posted for you. This form uses Google services (Google Sheets, Gmail, and Google Apps Script) to store your request and send notifications, so your information is processed on Google&rsquo;s systems on behalf of the School. We do not sell your information or use it for marketing. We share it with others only when required by law or by DepEd regulations.</p>
+    <h4>6. How long we keep it</h4>
+    <p>Your personal details are erased or made anonymous about 30 days after your document is released, or after 180 days if your request is never completed. Anonymous information, such as the number of requests received, may be kept for reports. Emails sent to you or to the Registrar&rsquo;s Office may remain in those mailboxes until their owners delete them.</p>
+    <h4>7. How we protect it</h4>
+    <p>We take reasonable steps to protect your information, such as limiting access to authorized staff and showing only limited information on the tracking page. No online system is completely risk-free, so please keep your reference number private.</p>
+    <h4>8. Your rights</h4>
+    <p>Under the Data Privacy Act of 2012 (RA 10173), you have the right to be informed about how your data is used; to access your data; to object to its processing; to correct inaccurate data; to request that it be erased or blocked; to data portability; to be compensated for damages; and to file a complaint with the National Privacy Commission (privacy.gov.ph).</p>
+    <h4>9. Withdrawing consent and inquiries</h4>
+    <p>You may withdraw your consent or ask about your information by contacting the Office of the SHS Registrar. If you withdraw your consent, we may no longer be able to process your request.</p>
+    <h4>10. Your certification</h4>
+    <p>By ticking the box and clicking &ldquo;I Agree,&rdquo; you certify that the information you provided is true and correct, and you consent to its collection and use for processing this request as described in this notice.</p>
+  </div>
+  <div class="dact"><button class="btn ghost" type="button" id="pdecline">Decline</button><button class="btn" type="button" id="pagree" disabled>I Agree</button></div>
+</div></div>
 
 <div class="ov" id="fov"><div class="dlg fdlg" role="dialog" aria-modal="true" aria-labelledby="fqt">
   <button class="x" type="button" id="fx" aria-label="Close">&times;</button>

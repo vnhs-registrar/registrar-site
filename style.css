@@ -222,3 +222,16 @@ nav.menu-open .burger span:after{transform:translateY(-6px) rotate(-45deg)}
 }
 
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+
+/* Data privacy notice window */
+.pdlg{position:relative;max-width:640px;border-top:5px solid var(--gold)}
+.pdlg small{font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--sky)}
+.pdlg h3{margin:2px 40px 6px 0}
+.phint{margin:0 0 12px;font-size:13px;color:var(--mut)}
+#pbody{max-height:50vh;overflow:auto;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe;font-size:13.5px;line-height:1.7;color:#2a3752}
+#pbody:focus-visible{outline:3px solid var(--gold)}
+#pbody h4{margin:16px 0 4px;font:600 14px Poppins,sans-serif;color:var(--navy)}#pbody h4:first-child{margin-top:0}
+#pbody p,#pbody ul{margin:0 0 8px}#pbody ul{padding-left:20px}
+#pagree:disabled{cursor:not-allowed;opacity:.45;box-shadow:none;transform:none}
+.plink{color:var(--royal);font-weight:600}
+@media(max-width:700px){#pbody{max-height:52dvh}}
