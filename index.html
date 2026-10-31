@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Office of the SHS Registrar | Valencia National High School</title>
+<title>VNHS-SHS Registrar | Valencia National High School - Senior High School</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -14,192 +14,245 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h8"/></symbol>
+  <symbol id="i-cert" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14.5L7 22l5-3 5 3-1.5-7.5"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></symbol>
+</svg>
 
-<div class="top"><div><span>Valencia National High School &middot; Senior High School</span></div></div>
+<div class="top"><div>
+  <span><a href="tel:+639171445973">+63 917 144 5973</a> &nbsp;|&nbsp; <a href="mailto:valencianationalshs@gmail.com">valencianationalshs@gmail.com</a></span>
+  <span>Valencia National High School - Senior High School</span>
+</div></div>
 
 <nav><div>
-  <a class="brand" href="#top"><img src="logo.png" alt="" width="42" height="42" decoding="async" onerror="this.remove()"><span>VNHS REGISTRAR</span></a>
-  <ul><li><a href="#top">Home</a></li><li><a href="#request">Request Form</a></li><li><a href="#track">Track Request</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#faq">FAQs</a></li><li><a href="#contact">Contact Us</a></li></ul>
+  <a class="brand" href="#home"><img src="logo.png" alt="" width="42" height="42" decoding="async" onerror="this.remove()"><span>VNHS-SHS REGISTRAR</span></a>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#request">Request a Form</a></li>
+    <li><a href="#track">Track Request</a></li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#faq">FAQs</a></li>
+    <li><a href="#contact">Contact Us</a></li>
+  </ul>
   <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
 </div></nav>
 
-<header class="hero" id="top"><div class="hero-in">
-  <!-- Put your school logo in this folder as logo.png -->
-  <img src="logo.png" alt="Valencia National High School seal" width="120" height="120" fetchpriority="high" decoding="async" onerror="this.remove()">
-  <div>
-    <small>Valencia National High School</small>
-    <h1>OFFICE OF THE SHS REGISTRAR <span>Online Request</span></h1>
-    <p>Request your permanent record, certifications, and diploma copies without lining up at the office.</p>
-  </div>
-</div></header>
+<main>
+<!-- ===================== HOME ===================== -->
+<div class="view" id="v-home">
+  <header class="hero"><div class="hero-in">
+    <img src="logo.png" alt="Valencia National High School seal" width="120" height="120" fetchpriority="high" decoding="async" onerror="this.remove()">
+    <div>
+      <small>Valencia National High School - Senior High School</small>
+      <h1>VNHS-SHS REGISTRAR <span>Online Request</span></h1>
+      <p>Request your permanent record, certifications, and diploma copies online, then follow your request until it is ready.</p>
+      <div class="cta"><a class="cbtn gold" href="#request">Request a Form</a><a class="cbtn line" href="#track">Track a Request</a></div>
+    </div>
+  </div></header>
 
-<section class="steps">
-  <div class="step rv"><b>1</b><p style="margin:0"><strong>Fill out the form</strong><span>Enter your details and choose the record you need.</span></p></div>
-  <div class="step rv"><b>2</b><p style="margin:0"><strong>Review and submit</strong><span>Check everything before it is sent.</span></p></div>
-  <div class="step rv"><b>3</b><p style="margin:0"><strong>Track your request</strong><span>Use your reference number to follow its status.</span></p></div>
-</section>
+  <section class="docs">
+    <article class="doc rv"><div class="ic"><svg><use href="#i-doc"/></svg></div><h3>SF10 / Form 137A</h3>
+      <p>Your permanent academic record.</p><a href="#request" data-doc="SF10/Form 137A (Permanent Record)">Request this &rarr;</a></article>
+    <article class="doc rv"><div class="ic"><svg><use href="#i-cert"/></svg></div><h3>Certification</h3>
+      <p>Certifications issued by the registrar. You will tell us which one you need.</p><a href="#request" data-doc="Certification">Request this &rarr;</a></article>
+    <article class="doc rv"><div class="ic"><svg><use href="#i-cap"/></svg></div><h3>Second Issuance of Diploma</h3>
+      <p>A replacement copy of your diploma. The registrar will contact you about the requirements.</p><a href="#request" data-doc="Second Issuance of Diploma">Request this &rarr;</a></article>
+  </section>
 
-<div class="wrap">
-<main class="card rv" id="request">
-  <div class="fhead">
-    <h2>Request Form</h2>
-    <p class="legend"><span class="req">*</span> Required field</p>
-    <div class="bar"><i id="bar"></i></div><span id="pc">0% complete</span>
-  </div>
+  <section class="sec rv"><h2>How It Works</h2><p class="sub">Four simple steps from request to release.</p></section>
+  <section class="steps four flat">
+    <div class="step rv"><b>1</b><p style="margin:0"><strong>Request a form</strong><span>Choose the document you need and fill out the form.</span></p></div>
+    <div class="step rv"><b>2</b><p style="margin:0"><strong>Review and submit</strong><span>Check your answers, then send. You get a reference number.</span></p></div>
+    <div class="step rv"><b>3</b><p style="margin:0"><strong>Track your request</strong><span>Use your reference number to follow its progress.</span></p></div>
+    <div class="step rv"><b>4</b><p style="margin:0"><strong>Claim your document</strong><span>Bring a valid ID and any requirements when contacted.</span></p></div>
+  </section>
+  <p class="sec-note">Need to prepare documents? <a href="#requirements">See the requirements</a>.</p>
 
-  <form id="f">
-    <input class="hp" type="text" name="Website" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-    <fieldset><legend><b>1</b>Student information</legend>
-      <div class="g">
-        <div class="f s2"><label class="l">First name <span class="req">*</span></label>
-          <input class="in" name="First Name" placeholder="Ex. Juan" autocomplete="given-name" required></div>
-        <div class="f s2"><label class="l">Middle name (if any)</label>
-          <input class="in" name="Middle Name" placeholder="Ex. Santos" autocomplete="additional-name"></div>
-        <div class="f s2"><label class="l">Last name <span class="req">*</span></label>
-          <input class="in" name="Last Name" placeholder="Ex. Dela Cruz" autocomplete="family-name" required></div>
-        <div class="f s2"><label class="l">LRN <span class="req">*</span></label>
-          <input class="in" name="LRN" inputmode="numeric" maxlength="12" pattern="[0-9]{12}" title="12-digit LRN" placeholder="Ex. 123456789012" required></div>
-        <div class="f s2"><label class="l">Track / Strand <span class="req">*</span></label>
-          <input class="in" name="Track/Strand" placeholder="Ex. STEM" required></div>
-        <div class="f s2"><label class="l">Grade level <span class="req">*</span></label>
-          <select class="in" name="Grade Level" required><option value="">Select</option><option>Grade 11</option><option>Grade 12</option></select></div>
-        <div class="f s2"><label class="l">Section <span class="req">*</span></label>
-          <input class="in" name="Section" placeholder="Ex. Section name" required></div>
-        <div class="f s2"><label class="l">Adviser <span class="req">*</span></label>
-          <input class="in" name="Adviser" placeholder="Ex. Adviser's full name" required></div>
-        <div class="f s2"><label class="l">School year <span class="req">*</span></label>
-          <select class="in" id="sy" name="School Year" required><option value="">Select</option></select></div>
-      </div>
-    </fieldset>
-
-    <fieldset><legend><b>2</b>Contact details</legend>
-      <div class="g">
-        <div class="f s3"><label class="l">Contact no. <span class="req">*</span></label>
-          <input class="in" type="tel" name="Contact No" inputmode="numeric" maxlength="11" pattern="09[0-9]{9}" title="11-digit mobile number starting with 09" placeholder="Ex. 09876543219" required></div>
-        <div class="f s3"><label class="l">Email address <span class="req">*</span></label>
-          <input class="in" type="email" name="email" placeholder="Ex. name@email.com" required></div>
-        
-      </div>
-    </fieldset>
-
-    <fieldset><legend><b>3</b>Requester</legend>
-      <label class="l" style="margin-top:14px">Who is making this request? <span class="req">*</span></label>
-      <div class="opts two" style="margin-top:0">
-        <label class="opt"><input type="radio" name="Requester" value="The student" required>The student (myself)</label>
-        <label class="opt"><input type="radio" name="Requester" value="A representative">A representative of the student</label>
-      </div>
-      <div class="more" id="m-rep"><div>
-        <div class="g">
-          <div class="f"><label class="l">Representative's full name <span class="req">*</span></label>
-            <input class="in" name="Representative Name" placeholder="Ex. Full name" disabled></div>
-          <div class="f"><label class="l">Relationship to student <span class="req">*</span></label>
-            <select class="in" name="Relationship" disabled><option value="">Select</option><option>Parent</option><option>Guardian</option><option>Sibling</option><option>Other relative</option><option>Other</option></select></div>
-        </div>
-        <p class="hint">A representative must bring an authorization letter signed by the student and a valid ID. Please confirm other requirements with the Registrar's Office.</p>
-      </div></div>
-    </fieldset>
-
-    <fieldset><legend><b>4</b>Request details</legend>
-      <label class="l" style="margin-top:14px">Request for <span class="req">*</span></label>
-      <div class="opts" style="margin-top:0">
-        <label class="opt"><input type="radio" name="Request For" value="SF10/Form 137A (Permanent Record)" required>SF10/Form 137A (Permanent Record)</label>
-        <label class="opt"><input type="radio" name="Request For" value="Certification">Certification</label>
-        <label class="opt"><input type="radio" name="Request For" value="Second Issuance of Diploma">Second Issuance of Diploma</label>
-      </div>
-      <div class="more" id="m-cert"><div><div class="f s6"><label class="l">Type of certification <span class="req">*</span></label>
-        <input class="in" name="Certification Type" placeholder="Ex. Certificate of Enrollment" disabled></div></div></div>
-
-      <div class="g"><div class="f s6"><label class="l">Purpose <span class="req">*</span></label>
-        <select class="in" name="Purpose" required>
-          <option value="">Select purpose</option>
-          <option>Passport/VISA Application</option>
-          <option>Late Registration/Correction of Entry in the Certificate of Live Birth</option>
-          <option>Scholarship Application</option>
-          <option>Local/Overseas Employment</option>
-          <option>PMA/PNPA Examination, AFPSAT, Philippine Navy Training</option>
-          <option>Enrollment/Evaluation (College Application)</option>
-          <option>Others</option>
-        </select></div></div>
-      <div class="more" id="m-oth"><div><div class="f s6"><label class="l">Please specify <span class="req">*</span></label>
-        <input class="in" name="Other Purpose" placeholder="Ex. State your purpose" disabled></div></div></div>
-
-      <div class="g">
-        <div class="f s2"><label class="l">Number of copies</label>
-          <div class="stepper"><button type="button" data-s="-1" aria-label="Fewer copies">&minus;</button><input class="in" name="Copies" value="1" readonly aria-label="Number of copies"><button type="button" data-s="1" aria-label="More copies">+</button></div></div>
-        <div class="f s4"><label class="l">How will the document be claimed? <span class="req">*</span></label>
-          <select class="in" name="Claim Method" required><option value="">Select</option><option>Pick up in person</option><option>Claim through an authorized representative</option><option>Other arrangement (to be discussed with the registrar)</option></select></div>
-        <div class="f s3 dp" data-dp="claim"><label class="l">Preferred claim date (optional)</label><input class="in" name="Preferred Claim Date" placeholder="Select date" readonly autocomplete="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><div class="cal"></div><small class="err"></small></div>
-      </div>
-      <div class="more" id="m-claim"><div><p class="hint">Bring an authorization letter and a valid ID of the person who will claim the document. Other arrangements are subject to approval by the Registrar's Office.</p></div></div>
-    </fieldset>
-
-    <label class="consent"><input type="checkbox" name="Privacy Consent" value="Agreed" required>
-      <span><span class="req">*</span> I certify that the information provided is true and correct, and I have read and agree to the <a class="plink" href="#">Data Privacy Notice</a> (Data Privacy Act of 2012, RA 10173).</span></label>
-
-    <div class="acts"><button class="btn main" type="submit">Review request</button><button class="btn ghost" type="reset">Clear form</button></div>
-  </form>
-</main>
-
-<aside class="side">
-  <div class="box rv" id="requirements"><h3>Requirements</h3><ol>
-    <li><strong>Affidavit of Loss</strong> for (a) Second Issuance of Diploma; (b) SF10/Form 137A for enrollment purposes, in case of lost Report Card.</li>
-    <li><strong>Photocopy of No Record of Birth</strong> issued by PSA, for Late Registration of Birth.</li></ol></div>
-  <div class="box rv"><h3>Reminders</h3><ul>
-    <li>Use your complete name as it appears in school records.</li>
-    <li>Keep your mobile number and email active.</li>
-    <li>Bring a valid school ID when claiming your document.</li></ul></div>
-</aside>
+  <section class="faq rv" id="faq"><h2>Frequently Asked Questions</h2>
+    <p class="faq-sub">Select a question to see the answer.</p>
+    <div class="fq-grid">
+      <div><button class="fq" type="button"><b>1</b><span>Which documents can I request?</span><i>&rarr;</i></button>
+        <div class="fa">The SF10/Form 137A (Permanent Record), Certification, and Second Issuance of Diploma.</div></div>
+      <div><button class="fq" type="button"><b>2</b><span>Do I need to submit other documents?</span><i>&rarr;</i></button>
+        <div class="fa">Only in some cases: an Affidavit of Loss, or a PSA No Record of Birth photocopy for late registration. See the Requirements. For a Second Issuance of Diploma, the VNHS-SHS Registrar will contact you about the requirements.</div></div>
+      <div><button class="fq" type="button"><b>3</b><span>How will I know when my request is ready?</span><i>&rarr;</i></button>
+        <div class="fa">The VNHS-SHS Registrar will contact you through the mobile number and email you provide. You can also check the Track Request page anytime using your reference number.</div></div>
+      <div><button class="fq" type="button"><b>4</b><span>Can I change my answers after submitting?</span><i>&rarr;</i></button>
+        <div class="fa">You review everything before it is sent. After that, please contact the VNHS-SHS Registrar to correct any entry.</div></div>
+      <div><button class="fq" type="button"><b>5</b><span>How long are my details kept?</span><i>&rarr;</i></button>
+        <div class="fa">Your request details are erased or made anonymous about 30 days after your document is released, or after 180 days if the request is never completed. The VNHS-SHS Registrar keeps only a short release record (name, LRN, document, purpose, date released, and who claimed it) as proof that the document was issued.</div></div>
+      <div><button class="fq" type="button"><b>6</b><span>What does &ldquo;On Hold&rdquo; mean?</span><i>&rarr;</i></button>
+        <div class="fa">On Hold means the VNHS-SHS Registrar needs requirements from you before your request can continue. Read the note on the Track Request page and contact the office. This step appears on your tracker only when your request is actually on hold.</div></div>
+    </div>
+  </section>
 </div>
 
-<section class="track rv" id="track"><div class="card tcard">
-  <h2>Track Your Request</h2>
-  <p class="faq-sub">Enter the reference number you received after submitting.</p>
-  <form id="trk" class="trow"><input class="in" id="tref" placeholder="Ex. K7M2-X9QF" maxlength="9" autocomplete="off" required><button class="btn" type="submit">Track</button></form>
-  <div id="tres" aria-live="polite"></div>
-</div></section>
+<!-- ===================== REQUEST FORM ===================== -->
+<div class="view" id="v-request" hidden>
+  <section class="pagebar"><div><small><a href="#home">Home</a> &rsaquo; Request a Form</small><h1>Request a Form</h1></div></section>
+  <div class="wrap">
+    <div class="card" id="request">
+      <div class="fhead">
+        <h2>Request Form</h2>
+        <p class="legend"><span class="req">*</span> Required field</p>
+        <div class="bar"><i id="bar"></i></div><span id="pc">0% complete</span>
+      </div>
 
-<section class="faq rv" id="faq"><h2>Frequently Asked Questions</h2>
-  <p class="faq-sub">Select a question to see the answer.</p>
-  <div class="fq-grid">
-    <div><button class="fq" type="button"><b>1</b><span>Which documents can I request?</span><i>&rarr;</i></button>
-      <div class="fa">The SF10/Form 137A (Permanent Record), Certification, and Second Issuance of Diploma.</div></div>
-    <div><button class="fq" type="button"><b>2</b><span>Do I need to submit other documents?</span><i>&rarr;</i></button>
-      <div class="fa">Only in some cases: an Affidavit of Loss, or a PSA No Record of Birth photocopy for late registration. See the Requirements box.</div></div>
-    <div><button class="fq" type="button"><b>3</b><span>How will I know when my request is ready?</span><i>&rarr;</i></button>
-      <div class="fa">The Registrar's Office will contact you through the mobile number and email you provide.</div></div>
-    <div><button class="fq" type="button"><b>4</b><span>Can I change my answers after submitting?</span><i>&rarr;</i></button>
-      <div class="fa">You review everything before it is sent. After that, please contact the Registrar's Office to correct any entry.</div></div>
-    <div><button class="fq" type="button"><b>5</b><span>How long are my details kept?</span><i>&rarr;</i></button>
-      <div class="fa">Your details are used only to process this request. They are erased about 30 days after your document is released, or after 180 days if the request is never completed.</div></div>
+      <form id="f">
+        <input class="hp" type="text" name="Website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <fieldset><legend><b>1</b>Learner information</legend>
+          <div class="g">
+            <div class="f s2"><label class="l">First name <span class="req">*</span></label>
+              <input class="in" name="First Name" placeholder="Ex. Juan" autocomplete="given-name" required></div>
+            <div class="f s2"><label class="l">Middle name (if any)</label>
+              <input class="in" name="Middle Name" placeholder="Ex. Santos" autocomplete="additional-name"></div>
+            <div class="f s2"><label class="l">Last name <span class="req">*</span></label>
+              <input class="in" name="Last Name" placeholder="Ex. Dela Cruz" autocomplete="family-name" required></div>
+            <div class="f s2"><label class="l">LRN <span class="req">*</span></label>
+              <input class="in" name="LRN" inputmode="numeric" maxlength="12" pattern="[0-9]{12}" title="12-digit LRN" placeholder="Ex. 123456789012" required></div>
+            <div class="f s2"><label class="l">Track / Cluster <span class="req">*</span></label>
+              <input class="in" name="Track/Cluster" placeholder="Ex. Academic/STEM" required></div>
+            <div class="f s2"><label class="l">Grade level <span class="req">*</span></label>
+              <select class="in" name="Grade Level" required><option value="">Select</option><option>Grade 11</option><option>Grade 12</option></select></div>
+            <div class="f s2"><label class="l">Section <span class="req">*</span></label>
+              <input class="in" name="Section" placeholder="Ex. Section name" required></div>
+            <div class="f s2"><label class="l">Adviser <span class="req">*</span></label>
+              <input class="in" name="Adviser" placeholder="Ex. Adviser's full name" required></div>
+            <div class="f s2"><label class="l">School year <span class="req">*</span></label>
+              <input class="in" name="School Year" inputmode="numeric" maxlength="9" placeholder="Ex. 2025-2026" autocomplete="off" required>
+              <div class="syh" id="syh"></div></div>
+          </div>
+        </fieldset>
+
+        <fieldset><legend><b>2</b>Contact details</legend>
+          <div class="g">
+            <div class="f s3"><label class="l">Contact no. <span class="req">*</span></label>
+              <input class="in" type="tel" name="Contact No" inputmode="numeric" maxlength="11" pattern="09[0-9]{9}" title="11-digit mobile number starting with 09" placeholder="Ex. 09876543219" required></div>
+            <div class="f s3"><label class="l">Email address <span class="req">*</span></label>
+              <input class="in" type="email" name="email" placeholder="Ex. name@email.com" required></div>
+          </div>
+        </fieldset>
+
+        <fieldset><legend><b>3</b>Requester</legend>
+          <label class="l" style="margin-top:14px">Who is making this request? <span class="req">*</span></label>
+          <div class="opts two" style="margin-top:0">
+            <label class="opt"><input type="radio" name="Requester" value="The learner" required>The learner (myself)</label>
+            <label class="opt"><input type="radio" name="Requester" value="A Representative">A Representative</label>
+          </div>
+          <div class="more" id="m-rep"><div>
+            <div class="g">
+              <div class="f"><label class="l">Representative's full name <span class="req">*</span></label>
+                <input class="in" name="Representative Name" placeholder="Ex. Full name" disabled></div>
+              <div class="f"><label class="l">Relationship with the learner <span class="req">*</span></label>
+                <input class="in" name="Relationship" placeholder="Ex. Mother, Guardian, Sibling" disabled></div>
+            </div>
+            <p class="hint">A representative must bring an authorization letter signed by the learner and a valid ID. Please confirm other requirements with the VNHS-SHS Registrar.</p>
+          </div></div>
+        </fieldset>
+
+        <fieldset><legend><b>4</b>Request details</legend>
+          <label class="l" style="margin-top:14px">Request for <span class="req">*</span></label>
+          <div class="opts" style="margin-top:0">
+            <label class="opt"><input type="radio" name="Request For" value="SF10/Form 137A (Permanent Record)" required>SF10/Form 137A (Permanent Record)</label>
+            <label class="opt"><input type="radio" name="Request For" value="Certification">Certification</label>
+            <label class="opt"><input type="radio" name="Request For" value="Second Issuance of Diploma">Second Issuance of Diploma</label>
+          </div>
+          <div class="more" id="m-dip"><div><p class="hint imp"><strong>Important:</strong> The VNHS-SHS Registrar will contact you about this request. Some requirements, such as an Affidavit of Loss, must be submitted or brought when you are contacted. Please keep your mobile number and email active.</p></div></div>
+          <div class="more" id="m-cert"><div><div class="f s6"><label class="l">Type of certification <span class="req">*</span></label>
+            <input class="in" name="Certification Type" placeholder="Ex. Certificate of Enrollment" disabled></div></div></div>
+
+          <div class="g"><div class="f s6"><label class="l">Purpose <span class="req">*</span></label>
+            <select class="in" name="Purpose" required>
+              <option value="">Select purpose</option>
+              <option>Passport/VISA Application</option>
+              <option>Late Registration/Correction of Entry in the Certificate of Live Birth</option>
+              <option>Scholarship Application</option>
+              <option>Local/Overseas Employment</option>
+              <option>PMA/PNPA Examination, AFPSAT, Philippine Navy Training</option>
+              <option>Enrollment/Evaluation (College Application)</option>
+              <option>Others</option>
+            </select></div></div>
+          <div class="more" id="m-oth"><div><div class="f s6"><label class="l">Please specify <span class="req">*</span></label>
+            <input class="in" name="Other Purpose" placeholder="Ex. State your purpose" disabled></div></div></div>
+
+          <div class="g"><div class="f s6"><label class="l">How will the document be claimed? <span class="req">*</span></label>
+            <select class="in" name="Claim Method" required><option value="">Select</option><option>Pick up in person</option><option>Claim through an authorized representative</option><option>Other arrangement (to be discussed with the registrar)</option></select></div></div>
+          <div class="more" id="m-claim"><div><p class="hint">Bring an authorization letter and a valid ID of the person who will claim the document. Other arrangements are subject to approval by the VNHS-SHS Registrar.</p></div></div>
+        </fieldset>
+
+        <label class="consent"><input type="checkbox" name="Privacy Consent" value="Agreed" required>
+          <span><span class="req">*</span> I certify that the information provided is true and correct, and I have read and agree to the <a class="plink" href="#">Data Privacy Notice</a> (Data Privacy Act of 2012, RA 10173).</span></label>
+
+        <div class="acts"><button class="btn main" type="submit">Review request</button><button class="btn ghost" type="reset">Clear form</button></div>
+      </form>
+    </div>
+
+    <aside class="side">
+      <div class="box" id="requirements"><h3>Requirements</h3>
+        <ol class="reqs">
+          <li><strong>Affidavit of Loss</strong> for:
+            <ol><li>Second Issuance of Diploma</li><li>Issuance of SF10/Form 137A for enrollment purposes (in case of lost Report Card)</li></ol></li>
+          <li><strong>Photocopy of No Record of Birth</strong> issued by PSA (for Late Registration of Birth)</li>
+        </ol></div>
+      <div class="box"><h3>Reminders</h3><ul>
+        <li>Use your complete name as it appears in school records.</li>
+        <li>Keep your mobile number and email active.</li>
+        <li>Bring a valid school ID when claiming your document.</li></ul></div>
+    </aside>
   </div>
-</section>
+</div>
+
+<!-- ===================== TRACK ===================== -->
+<div class="view" id="v-track" hidden>
+  <section class="pagebar"><div><small><a href="#home">Home</a> &rsaquo; Track a Request</small><h1>Track a Request</h1></div></section>
+  <div class="track"><div class="card tcard" id="track">
+    <h2>Track Your Request</h2>
+    <p class="faq-sub">Enter the reference number you received after submitting.</p>
+    <form id="trk" class="trow"><input class="in" id="tref" placeholder="Ex. K7M2-X9QF" autocomplete="off" maxlength="9" required><button class="btn" type="submit">Track</button></form>
+    <div id="tres" aria-live="polite"></div>
+  </div></div>
+</div>
+</main>
+
+<footer class="foot" id="contact">
+  <div class="fgrid">
+    <div><strong>VNHS-SHS REGISTRAR</strong>
+      <p>Valencia National High School - Senior High School<br>Lapu-Lapu St., Poblacion, Valencia City, Bukidnon, 8709</p></div>
+    <div><h4>Get in touch</h4>
+      <p><a href="tel:09171445973">0917-144-5973</a><br><a href="mailto:valencianationalshs@gmail.com">valencianationalshs@gmail.com</a></p></div>
+    <div><h4>Quick links</h4>
+      <ul><li><a href="#request">Request a Form</a></li><li><a href="#track">Track a Request</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#faq">FAQs</a></li></ul></div>
+  </div>
+  <div class="copy">&copy; <span id="yr"></span> Valencia National High School - Senior High School. All rights reserved. &nbsp;&middot;&nbsp; <a class="pread" href="#">Data Privacy Notice</a></div>
+</footer>
 
 <!-- DATA PRIVACY NOTICE: a template. The school's Data Protection Officer should review it. Keep the retention days (30 and 180) the same as in Code.gs. -->
 <div class="ov" id="pov"><div class="dlg pdlg" role="dialog" aria-modal="true" aria-labelledby="pt">
   <button class="x" type="button" id="px" aria-label="Close">&times;</button>
-  <small>Valencia National High School &middot; Office of the SHS Registrar</small>
+  <small>Valencia National High School - Senior High School</small>
   <h3 id="pt">Data Privacy Notice</h3>
   <p class="phint">Please read the notice below. The I Agree button turns on when you reach the end.</p>
   <div id="pbody" tabindex="0">
     <h4>1. Who we are</h4>
-    <p>This notice is issued by Valencia National High School, through the Office of the SHS Registrar (&ldquo;the School&rdquo;), which operates this online request form.</p>
+    <p>This notice is issued by Valencia National High School - Senior High School, through the VNHS-SHS Registrar (&ldquo;the School&rdquo;), which operates this online request form.</p>
     <h4>2. What information we collect</h4>
-    <p>To process your request, we collect your full name; Learner Reference Number (LRN); track or strand, grade level, section, adviser, and school year; your mobile number and email address; whether you or a representative is making the request, and the representative&rsquo;s name and relationship to you, if any; and the document you are requesting, its purpose, the number of copies, and how it will be claimed. The system also records the date and time of your request and gives it a reference number.</p>
+    <p>To process your request, we collect the learner&rsquo;s full name; Learner Reference Number (LRN); track or cluster, grade level, section, adviser, and school year; your mobile number and email address; whether the learner or a representative is making the request, and the representative&rsquo;s name and relationship with the learner, if any; and the document requested, its purpose, and how it will be claimed. The system also records the date and time of the request and gives it a reference number.</p>
     <h4>3. Why we collect it</h4>
-    <ul><li>To process your request for an SF10/Form 137A, a certification, or a second issuance of diploma.</li><li>To check your identity against school records.</li><li>To contact you about your request.</li><li>To let you track the status of your request.</li><li>To prepare the document for claiming.</li></ul>
+    <ul><li>To process the request for an SF10/Form 137A, a certification, or a second issuance of diploma.</li><li>To check the learner&rsquo;s identity against school records.</li><li>To contact you about the request.</li><li>To let you track the status of the request.</li><li>To prepare the document for claiming.</li></ul>
     <h4>4. Legal basis</h4>
-    <p>We process your information based on your consent, which you give by ticking the box on the form, and because the School needs it to carry out its work of keeping and releasing student records.</p>
+    <p>We process your information based on your consent, which you give by ticking the box on the form, and because the School needs it to carry out its work of keeping and releasing learner records.</p>
     <h4>5. Who can see it</h4>
-    <p>Only authorized staff of the Registrar&rsquo;s Office can see your full request details. Anyone who has your reference number can see only the status, the type of request, and any note posted for you. This form uses Google services (Google Sheets, Gmail, and Google Apps Script) to store your request and send notifications, so your information is processed on Google&rsquo;s systems on behalf of the School. We do not sell your information or use it for marketing. We share it with others only when required by law or by DepEd regulations.</p>
+    <p>Only authorized staff of the VNHS-SHS Registrar can see the full request details. Anyone who has your reference number can see only the status, the type of request, and any note posted for you. This form uses Google services (Google Sheets, Gmail, and Google Apps Script) to store the request and send notifications, so the information is processed on Google&rsquo;s systems on behalf of the School. We do not sell your information or use it for marketing. We share it with others only when required by law or by DepEd regulations.</p>
     <h4>6. How long we keep it</h4>
-    <p>Your personal details are erased or made anonymous about 30 days after your document is released, or after 180 days if your request is never completed. Anonymous information, such as the number of requests received, may be kept for reports. Emails sent to you or to the Registrar&rsquo;s Office may remain in those mailboxes until their owners delete them.</p>
+    <p>The personal details in the request record are erased or made anonymous about 30 days after the document is released, or after 180 days if the request is never completed. When a document is released, the VNHS-SHS Registrar keeps a short release record (the learner&rsquo;s name, LRN, grade level, track or cluster, school year, the document released, its purpose, the date it was released, and who claimed it) as proof that the document was issued. This release record is kept in line with the School&rsquo;s records policy. Anonymous information, such as the number of requests received, may be kept for reports. Emails sent to you or to the VNHS-SHS Registrar may remain in those mailboxes until their owners delete them.</p>
     <h4>7. How we protect it</h4>
     <p>We take reasonable steps to protect your information, such as limiting access to authorized staff and showing only limited information on the tracking page. No online system is completely risk-free, so please keep your reference number private.</p>
     <h4>8. Your rights</h4>
     <p>Under the Data Privacy Act of 2012 (RA 10173), you have the right to be informed about how your data is used; to access your data; to object to its processing; to correct inaccurate data; to request that it be erased or blocked; to data portability; to be compensated for damages; and to file a complaint with the National Privacy Commission (privacy.gov.ph).</p>
     <h4>9. Withdrawing consent and inquiries</h4>
-    <p>You may withdraw your consent or ask about your information by contacting the Office of the SHS Registrar. If you withdraw your consent, we may no longer be able to process your request.</p>
+    <p>You may withdraw your consent or ask about your information by contacting the VNHS-SHS Registrar at 0917-144-5973 or valencianationalshs@gmail.com. If you withdraw your consent, we may no longer be able to process your request.</p>
     <h4>10. Your certification</h4>
     <p>By ticking the box and clicking &ldquo;I Agree,&rdquo; you certify that the information you provided is true and correct, and you consent to its collection and use for processing this request as described in this notice.</p>
   </div>
@@ -212,11 +265,6 @@
   <div class="dact"><button class="btn" type="button" id="fclose">Got it</button></div>
 </div></div>
 
-<footer class="foot" id="contact"><div>
-  <p style="margin:0"><strong>Valencia National High School</strong>Office of the SHS Registrar<br>Visit the office during school hours for assistance.</p>
-  <p style="margin:0">Senior High School Department<br>&copy; <span id="yr"></span> VNHS. All rights reserved.</p>
-</div></footer>
-
 <div class="ov" id="ov"><div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dt">
   <div id="rv"><h3 id="dt">Review your request</h3>
     <p>Please check that everything is correct before submitting.</p>
@@ -227,11 +275,12 @@
     <h3>Request submitted</h3>
     <p style="margin:0;color:var(--mut);font-size:13px">Keep your reference number for follow-ups.</p>
     <div class="refno" id="ref"></div>
-    <p style="margin:0;color:var(--mut);font-size:13px">The Registrar's Office will contact you using your details.</p>
+    <p style="margin:0;color:var(--mut);font-size:13px">The VNHS-SHS Registrar will contact you using your details.</p>
     <div class="dact" style="justify-content:center"><button class="btn ghost" type="button" id="copy">Copy reference no.</button><button class="btn ghost" type="button" id="gotrack">Track request</button><button class="btn" type="button" id="fin">Done</button></div>
   </div>
 </div></div>
 
+<script src="config.js"></script>
 <script src="script.js" defer></script>
 </body>
 </html>
