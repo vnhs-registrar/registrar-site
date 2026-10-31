@@ -1,20 +1,37 @@
 (() => {
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 document.documentElement.classList.add('js');
-// Paste your Google Apps Script Web app URL here (see the setup steps)
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycby1SIQHixCq1fJVodbcekZVC15r-GHJMYR8aryU1QMQK_LP2GeRuWJkvxgegRaxsZC3/exec';
-const useGoogle = !ENDPOINT.includes('PASTE_');
+const ENDPOINT = window.REGISTRAR_ENDPOINT || '';           // set once in config.js
+const useGoogle = ENDPOINT.startsWith('https://script.google.com/');
 const form = $('#f'), esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// "JUAN" or "dela cruz" becomes "Juan" / "Dela Cruz"; mixed capitals are left alone
 const tidy = t => { t = (t || '').trim().replace(/\s+/g, ' '); return (t === t.toUpperCase() || t === t.toLowerCase()) ? t.toLowerCase().replace(/(^|[\s-])([a-z])/g, (m, a, c) => a + c.toUpperCase()) : t; };
-const today = new Date(); today.setHours(0, 0, 0, 0); const Y = today.getFullYear();
+$('#yr').textContent = new Date().getFullYear();
+$$('[inputmode=numeric]').forEach(i => i.addEventListener('input', () => { if (i.name != 'School Year') i.value = i.value.replace(/\D/g, ''); }));
 
-// Dropdown years: school year 2026-2027 to 2034-2035 (change 2034 to extend)
-for (let y = 2026; y <= 2034; y++) $('#sy').add(new Option(`${y}-${y + 1}`, `${y}-${y + 1}`));
-$('#yr').textContent = Y;
-
-$$('[inputmode=numeric]').forEach(i => i.addEventListener('input', () => i.value = i.value.replace(/\D/g, '')));
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold: .1});
+// Scroll reveal
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } }), {threshold: .1});
 $$('.rv').forEach(el => io.observe(el));
+
+// ===== Pages (Home, Request a Form, Track a Request) =====
+const V = {home: $('#v-home'), request: $('#v-request'), track: $('#v-track')};
+let cur = 'home';
+function route() {
+  const id = (location.hash || '#home').slice(1);
+  const view = id == 'request' || id == 'requirements' ? 'request' : id == 'track' ? 'track' : id == 'contact' ? cur : 'home';
+  const changed = view != cur; cur = view;
+  Object.keys(V).forEach(k => V[k].hidden = k != view);          // showing a page replays its fade-in
+  $$('nav li a').forEach(a => a.classList.toggle('on', a.hash == '#' + id));
+  const target = ['requirements', 'faq', 'contact'].includes(id) ? document.getElementById(id) : null;
+  requestAnimationFrame(() => target ? target.scrollIntoView({behavior: changed ? 'instant' : 'smooth', block: 'start'}) : scrollTo({top: 0, behavior: changed ? 'instant' : 'smooth'}));
+}
+addEventListener('hashchange', route); route();
+
+// Document cards on the home page pre-select the document
+$$('[data-doc]').forEach(a => a.addEventListener('click', () => {
+  const r = $$('input[name="Request For"]').find(i => i.value == a.dataset.doc);
+  if (r) { r.checked = true; r.dispatchEvent(new Event('change', {bubbles: true})); }
+}));
 
 // Phone menu
 const nav = $('nav'), burger = $('.burger');
@@ -23,81 +40,51 @@ burger.addEventListener('click', () => menu(!nav.classList.contains('menu-open')
 $$('nav li a').forEach(a => a.addEventListener('click', () => menu(false)));
 document.addEventListener('click', e => { if (!e.target.closest('nav')) menu(false); });
 
-// Copies stepper (1 to 5)
-$$('.stepper button').forEach(b => b.addEventListener('click', () => {
-  const i = b.parentElement.querySelector('input'); i.value = Math.min(5, Math.max(1, +i.value + +b.dataset.s));
-}));
+// ===== School year: free typing, with a prompt when only one year is entered =====
+const sy = form.elements['School Year'], syh = $('#syh');
+const note = (html, bad) => { syh.className = 'syh' + (bad ? ' bad' : ''); syh.innerHTML = html; };
+function checkSY(final) {
+  const v = sy.value.trim(); sy.setCustomValidity('');
+  if (!v) return note('');
+  let m = v.match(/^(\d{4})\s*[-\u2013\/ ]\s*(\d{4})$/);
+  if (m) {
+    const a = +m[1], b = +m[2];
+    if (b == a + 1 && a >= 1990 && a <= 2100) { sy.value = a + '-' + b; return note(''); }
+    sy.setCustomValidity('Use two consecutive years.'); return note('The two years must be consecutive, for example 2025-2026.', true);
+  }
+  m = v.match(/^(\d{4})$/);
+  if (m) {
+    sy.setCustomValidity('Choose a school year.');
+    if (!final) return;
+    const y = +m[1];
+    return note(`Only one year entered. Did you mean:<div class="chips"><button type="button" class="chip" data-v="${y - 1}-${y}">${y - 1}-${y}</button><button type="button" class="chip" data-v="${y}-${y + 1}">${y}-${y + 1}</button></div>`);
+  }
+  if (final) { sy.setCustomValidity('Enter a school year like 2025-2026.'); note('Enter a school year like 2025-2026.', true); }
+}
+sy.addEventListener('input', () => { sy.value = sy.value.replace(/[^\d\-\u2013\/ ]/g, ''); note(''); checkSY(false); });
+sy.addEventListener('change', () => checkSY(true));
+syh.addEventListener('click', e => {
+  const c = e.target.closest('.chip'); if (!c) return;
+  sy.value = c.dataset.v; checkSY(true); sy.dispatchEvent(new Event('input', {bubbles: true}));
+});
 
-// Progress bar + conditional fields
+// ===== Progress bar + conditional fields =====
 const toggle = (box, on) => { box.classList.toggle('show', on); box.querySelectorAll('input,select').forEach(i => { i.disabled = !on; i.required = on; }); };
 function sync() {
   const v = n => form.elements[n].value;
-  toggle($('#m-cert'), v('Request For') === 'Certification');
-  toggle($('#m-oth'), v('Purpose') === 'Others');
-  toggle($('#m-rep'), v('Requester') === 'A representative');
-  toggle($('#m-claim'), !!v('Claim Method') && v('Claim Method') !== 'Pick up in person');
+  toggle($('#m-cert'), v('Request For') == 'Certification');
+  toggle($('#m-dip'), v('Request For') == 'Second Issuance of Diploma');
+  toggle($('#m-oth'), v('Purpose') == 'Others');
+  toggle($('#m-rep'), v('Requester') == 'A Representative');
+  toggle($('#m-claim'), !!v('Claim Method') && v('Claim Method') != 'Pick up in person');
   const names = [...new Set($$('#f [required]').filter(e => !e.disabled).map(e => e.name))];
-  const done = names.filter(n => { const e = form.elements[n]; return e.type === 'checkbox' ? e.checked : !!e.value; }).length;
+  const done = names.filter(n => { const e = form.elements[n]; return e.type == 'checkbox' ? e.checked : !!e.value; }).length;
   const p = Math.round(done / names.length * 100);
   $('#bar').style.width = p + '%'; $('#pc').textContent = p + '% complete';
 }
 form.addEventListener('input', sync); form.addEventListener('change', sync);
 
-// Calendars (request date, birthdate, claim date)
-const MS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const CFG = {
-  request: {from: Y, to: Y + 1, min: today, start: Y},
-  claim: {from: Y, to: Y + 1, min: today, start: Y},
-  birth: {from: Y - 40, to: Y - 10, max: today, start: Y - 17, desc: true, noToday: true}
-};
-const pickers = [];
-function picker(root, o) {
-  const i = root.querySelector('input'), c = root.querySelector('.cal'), er = root.querySelector('.err');
-  const p = {i, c, er, v: null, y: o.start, m: today.getMonth(), req: root.hasAttribute('data-req')};
-  const draw = () => {
-    const {y, m} = p, first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate(), ys = [];
-    for (let t = o.from; t <= o.to; t++) ys.push(t); if (o.desc) ys.reverse();
-    let h = `<div class="ch"><button type="button" data-n="-1" aria-label="Previous month">&lsaquo;</button>
-    <select data-k="m" aria-label="Month">${MS.map((n, k) => `<option value="${k}"${k == m ? ' selected' : ''}>${n}</option>`).join('')}</select>
-    <select data-k="y" aria-label="Year">${ys.map(t => `<option${t == y ? ' selected' : ''}>${t}</option>`).join('')}</select>
-    <button type="button" data-n="1" aria-label="Next month">&rsaquo;</button></div><div class="cg">` +
-      ['Su','Mo','Tu','We','Th','Fr','Sa'].map(d => `<span class="w">${d}</span>`).join('') + '<span></span>'.repeat(first);
-    for (let d = 1; d <= days; d++) {
-      const dt = new Date(y, m, d), k = ['d'], off = (o.min && dt < o.min) || (o.max && dt > o.max);
-      if (+dt == +today) k.push('today'); if (p.v && +dt == +p.v) k.push('sel');
-      h += `<button type="button" class="${k.join(' ')}" data-d="${d}"${off ? ' disabled' : ''}>${d}</button>`;
-    }
-    c.innerHTML = h + `</div><div class="cf">${o.noToday ? '<span></span>' : '<button type="button" data-a="today">Today</button>'}<button type="button" data-a="clear">Clear</button></div>`;
-  };
-  const pick = d => {
-    p.v = d; i.value = d ? d.toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'}) : '';
-    er.textContent = ''; c.classList.remove('open'); i.dispatchEvent(new Event('input', {bubbles: true}));
-  };
-  const open = () => {
-    $$('.cal.open').forEach(x => x.classList.remove('open'));
-    const b = p.v || new Date(o.start, today.getMonth(), 1); p.y = b.getFullYear(); p.m = b.getMonth(); draw(); c.classList.add('open');
-  };
-  i.addEventListener('click', open);
-  i.addEventListener('keydown', e => { if (e.key == 'Enter' || e.key == ' ') { e.preventDefault(); open(); } });
-  c.addEventListener('click', e => {
-    const t = e.target.closest('button'); if (!t) return;
-    if (t.dataset.n) {
-      p.m += +t.dataset.n; if (p.m < 0) { p.m = 11; p.y--; } if (p.m > 11) { p.m = 0; p.y++; }
-      p.y = Math.min(Math.max(p.y, o.from), o.to); draw();
-    } else if (t.dataset.d) pick(new Date(p.y, p.m, +t.dataset.d));
-    else if (t.dataset.a == 'today') pick(new Date(today));
-    else if (t.dataset.a == 'clear') pick(null);
-  });
-  c.addEventListener('change', () => { p.m = +c.querySelector('[data-k=m]').value; p.y = +c.querySelector('[data-k=y]').value; draw(); });
-  pickers.push(p);
-}
-$$('.dp').forEach(r => picker(r, CFG[r.dataset.dp]));
-document.addEventListener('click', e => {
-  const path = e.composedPath(); // keeps the calendar open when a button inside it re-draws the grid
-  $$('.cal.open').forEach(c => { if (!path.includes(c.parentElement)) c.classList.remove('open'); });
-});
-
-// FAQ pop-out window
+// ===== FAQ pop-out window =====
 const fov = $('#fov');
 const faq = on => { fov.classList.toggle('open', on); document.body.style.overflow = on ? 'hidden' : ''; if (on) $('#fclose').focus(); };
 $$('.fq').forEach((b, i, all) => b.addEventListener('click', () => {
@@ -109,40 +96,45 @@ $$('.fq').forEach((b, i, all) => b.addEventListener('click', () => {
 $('#fclose').onclick = $('#fx').onclick = () => faq(false);
 fov.addEventListener('click', e => { if (e.target == fov) faq(false); });
 
-// Data privacy notice window (opens when the box is ticked)
+// ===== Data privacy notice window (opens when the box is ticked, or read-only from the footer) =====
 const pov = $('#pov'), pb = $('#pbody'), cb = form.elements['Privacy Consent'];
 let consent = false;
 const atEnd = () => { $('#pagree').disabled = pb.scrollHeight - pb.scrollTop - pb.clientHeight > 12; };
-const privacy = on => { pov.classList.toggle('open', on); document.body.style.overflow = on ? 'hidden' : ''; if (on) { pb.scrollTop = 0; atEnd(); pb.focus(); } };
+const privacy = (on, read) => {
+  pov.classList.toggle('open', on); document.body.style.overflow = on ? 'hidden' : '';
+  if (!on) return;
+  $('#pagree').hidden = $('#pov .phint').hidden = !!read; $('#pdecline').textContent = read ? 'Close' : 'Decline';
+  pb.scrollTop = 0; atEnd(); pb.focus();
+};
 pb.addEventListener('scroll', atEnd);
 cb.addEventListener('change', () => { if (cb.checked && !consent) { cb.checked = false; privacy(true); } else if (!cb.checked) consent = false; });
 $$('.plink').forEach(a => a.addEventListener('click', e => { e.preventDefault(); privacy(true); }));
+$$('.pread').forEach(a => a.addEventListener('click', e => { e.preventDefault(); privacy(true, true); }));
 $('#pagree').onclick = () => { consent = true; cb.checked = true; privacy(false); cb.dispatchEvent(new Event('input', {bubbles: true})); };
 $('#pdecline').onclick = $('#px').onclick = () => privacy(false);
 pov.addEventListener('click', e => { if (e.target == pov) privacy(false); });
 
-// Review window
+// ===== Review window =====
 const ov = $('#ov');
 const show = on => { ov.classList.toggle('open', on); document.body.style.overflow = on ? 'hidden' : ''; if (on) $('#ok').focus(); };
 form.addEventListener('submit', e => {
-  e.preventDefault(); form.classList.add('tried');
+  e.preventDefault(); form.classList.add('tried'); checkSY(true);
   if (!form.reportValidity()) return;
-  const miss = pickers.filter(p => p.req && !p.i.value);
-  if (miss.length) { miss.forEach(p => p.er.textContent = 'Please select a date.'); miss[0].i.scrollIntoView({block: 'center'}); return; }
   $('#rl').innerHTML = [...new FormData(form)].filter(([k, v]) => k != 'Website' && v !== '')
     .map(([k, v]) => `<div><dt>${k == 'email' ? 'Email' : esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
   $('#em').textContent = ''; $('#rv').hidden = false; $('#done').hidden = true; show(true);
 });
 $('#back').onclick = () => show(false);
 ov.addEventListener('click', e => { if (e.target == ov && !$('#rv').hidden) show(false); });
-document.addEventListener('keydown', e => { if (e.key == 'Escape') { $$('.cal.open').forEach(c => c.classList.remove('open')); faq(false); privacy(false); if (!$('#rv').hidden) show(false); } });
+document.addEventListener('keydown', e => { if (e.key == 'Escape') { faq(false); privacy(false); if (!$('#rv').hidden) show(false); } });
 
+// ===== Send =====
 $('#ok').onclick = async () => {
   const b = $('#ok'); $('#em').textContent = '';
   if (!useGoogle) { $('#em').textContent = "The registrar's system is not connected yet. Please try again later."; return; }
   const data = Object.fromEntries(new FormData(form));
   const fn = tidy(data['First Name']), mn = tidy(data['Middle Name']), ln = tidy(data['Last Name']);
-  data['Student Name'] = ln + ', ' + fn + (mn ? ' ' + mn : '');
+  data['Learner Name'] = ln + ', ' + fn + (mn ? ' ' + mn : '');       // one column in the sheet: "Dela Cruz, Juan Santos"
   ['First Name', 'Middle Name', 'Last Name'].forEach(k => delete data[k]);
   Object.keys(data).forEach(k => data[k] === '' && delete data[k]);
   b.disabled = true; b.classList.add('load');
@@ -155,19 +147,21 @@ $('#ok').onclick = async () => {
 };
 const finish = () => { show(false); form.reset(); form.classList.remove('tried'); $('#copy').textContent = 'Copy reference no.'; };
 $('#copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('#ref').textContent); $('#copy').textContent = 'Copied!'; };
-$('#fin').onclick = () => { finish(); scrollTo({top: 0, behavior: 'smooth'}); };
-$('#gotrack').onclick = () => { $('#tref').value = $('#ref').textContent; finish(); $('#track').scrollIntoView({behavior: 'smooth'}); };
-form.addEventListener('reset', () => { pickers.forEach(p => p.v = null); consent = false; setTimeout(sync); });
+$('#fin').onclick = () => { finish(); location.hash = '#home'; };
+$('#gotrack').onclick = () => { $('#tref').value = $('#ref').textContent; finish(); location.hash = '#track'; };
+form.addEventListener('reset', () => { consent = false; note(''); sy.setCustomValidity(''); setTimeout(sync); });
 
-// Request tracking
-const STEPS = ['Received', 'Processing', 'Ready for pick-up', 'Released'];
+// ===== Request tracking =====
 function renderTrack(j) {
-  const idx = {'Received': 0, 'Processing': 1, 'Needs documents': 1, 'Ready for pick-up': 2, 'Released': 3}[j.status] ?? 0, warn = j.status == 'Needs documents';
-  $('#tres').innerHTML = `<div class="tl">${STEPS.map((s, k) => `<div><i>${k + 1}</i>${s}</div>`).join('')}</div>` +
-    (warn ? '<p class="tmsg" style="background:#fff8e1;color:#7a5200">Additional documents are needed. Please read the note from the registrar below.</p>' : '') +
-    `<div class="tinfo"><div><small>Request</small><b>${esc(j.type || '-')}</b></div><div><small>Status</small><b>${esc(j.status)}</b></div>
+  const st = j.status == 'Needs documents' ? 'On Hold' : j.status, hold = st == 'On Hold';
+  // "On Hold" only appears in the timeline when the sheet says the request is on hold
+  const steps = hold ? ['Received', 'Processing', 'On Hold', 'Ready for pick-up', 'Released'] : ['Received', 'Processing', 'Ready for pick-up', 'Released'];
+  const idx = Math.max(0, steps.indexOf(st));
+  $('#tres').innerHTML = `<div class="tl">${steps.map((s, k) => `<div><i>${k + 1}</i>${s}</div>`).join('')}</div>` +
+    (hold ? '<p class="tmsg" style="background:#fff8e1;color:#7a5200">Your request is on hold because the VNHS-SHS Registrar needs requirements from you. Please read the note below and contact the office at 0917-144-5973 or valencianationalshs@gmail.com.</p>' : '') +
+    `<div class="tinfo"><div><small>Request</small><b>${esc(j.type || '-')}</b></div><div><small>Status</small><b>${esc(st)}</b></div>
     <div><small>Last updated</small><b>${esc(j.updated || '-')}</b></div>${j.note ? `<div><small>Note from the registrar</small><b>${esc(j.note)}</b></div>` : ''}</div>`;
-  $$('#tres .tl div').forEach((el, k) => { if (k <= idx) setTimeout(() => { el.classList.add('on'); if (k == idx) el.classList.add(warn ? 'warn' : 'now'); }, 250 * k + 150); });
+  $$('#tres .tl div').forEach((el, k) => { if (k <= idx) setTimeout(() => { el.classList.add('on'); if (k == idx) el.classList.add(hold ? 'warn' : 'now'); }, 250 * k + 150); });
 }
 $('#trk').addEventListener('submit', async e => {
   e.preventDefault();
