@@ -43,21 +43,24 @@ document.addEventListener('click', e => { if (!e.target.closest('nav')) menu(fal
 // ===== School year: free typing, with a prompt when only one year is entered =====
 const sy = form.elements['School Year'], syh = $('#syh');
 const note = (html, bad) => { syh.className = 'syh' + (bad ? ' bad' : ''); syh.innerHTML = html; };
+const SHS_START = 2016, startMsg = 'Senior High School started in 2016, so the earliest school year is 2016-2017.';
 function checkSY(final) {
   const v = sy.value.trim(); sy.setCustomValidity('');
   if (!v) return note('');
   let m = v.match(/^(\d{4})\s*[-\u2013\/ ]\s*(\d{4})$/);
   if (m) {
     const a = +m[1], b = +m[2];
-    if (b == a + 1 && a >= 1990 && a <= 2100) { sy.value = a + '-' + b; return note(''); }
+    if (b == a + 1 && a < SHS_START) { sy.setCustomValidity(startMsg); return note(startMsg, true); }
+    if (b == a + 1 && a <= 2100) { sy.value = a + '-' + b; return note(''); }
     sy.setCustomValidity('Use two consecutive years.'); return note('The two years must be consecutive, for example 2025-2026.', true);
   }
   m = v.match(/^(\d{4})$/);
   if (m) {
     sy.setCustomValidity('Choose a school year.');
     if (!final) return;
-    const y = +m[1];
-    return note(`Only one year entered. Did you mean:<div class="chips"><button type="button" class="chip" data-v="${y - 1}-${y}">${y - 1}-${y}</button><button type="button" class="chip" data-v="${y}-${y + 1}">${y}-${y + 1}</button></div>`);
+    const y = +m[1], opts = [[y - 1, y], [y, y + 1]].filter(p => p[0] >= SHS_START);
+    if (!opts.length) { sy.setCustomValidity(startMsg); return note(startMsg, true); }
+    return note(`Only one year entered. Did you mean:<div class="chips">${opts.map(p => `<button type="button" class="chip" data-v="${p[0]}-${p[1]}">${p[0]}-${p[1]}</button>`).join('')}</div>`);
   }
   if (final) { sy.setCustomValidity('Enter a school year like 2025-2026.'); note('Enter a school year like 2025-2026.', true); }
 }
@@ -153,12 +156,13 @@ form.addEventListener('reset', () => { consent = false; note(''); sy.setCustomVa
 
 // ===== Request tracking =====
 function renderTrack(j) {
-  const st = j.status == 'Needs documents' ? 'On Hold' : j.status, hold = st == 'On Hold';
+  const st = ({'Needs documents': 'On Hold', 'Ready for pick-up': 'Ready to Claim'})[j.status] || j.status, hold = st == 'On Hold';
   // "On Hold" only appears in the timeline when the sheet says the request is on hold
-  const steps = hold ? ['Received', 'Processing', 'On Hold', 'Ready for pick-up', 'Released'] : ['Received', 'Processing', 'Ready for pick-up', 'Released'];
+  const steps = hold ? ['Received', 'Processing', 'On Hold', 'Ready to Claim', 'Released'] : ['Received', 'Processing', 'Ready to Claim', 'Released'];
   const idx = Math.max(0, steps.indexOf(st));
-  $('#tres').innerHTML = `<div class="tl">${steps.map((s, k) => `<div><i>${k + 1}</i>${s}</div>`).join('')}</div>` +
-    (hold ? '<p class="tmsg" style="background:#fff8e1;color:#7a5200">Your request is on hold because the VNHS-SHS Registrar needs requirements from you. Please read the note below and contact the office at 0917-144-5973 or valencianationalshs@gmail.com.</p>' : '') +
+  const msg = hold ? '<p class="tmsg" style="background:#fff8e1;color:#7a5200">Your request is on hold because the VNHS-SHS Registrar needs requirements from you. Please read the note below and contact the office at 0917-144-5973 or valencianationalshs@gmail.com.</p>'
+    : st == 'Ready to Claim' ? '<p class="tmsg" style="background:#e6f7ee;color:#0b5b2b">Your document is ready to claim at the VNHS-SHS Registrar. Please bring a valid ID.</p>' : '';
+  $('#tres').innerHTML = `<div class="tl">${steps.map((x, k) => `<div><i>${k + 1}</i>${x}</div>`).join('')}</div>${msg}` +
     `<div class="tinfo"><div><small>Request</small><b>${esc(j.type || '-')}</b></div><div><small>Status</small><b>${esc(st)}</b></div>
     <div><small>Last updated</small><b>${esc(j.updated || '-')}</b></div>${j.note ? `<div><small>Note from the registrar</small><b>${esc(j.note)}</b></div>` : ''}</div>`;
   $$('#tres .tl div').forEach((el, k) => { if (k <= idx) setTimeout(() => { el.classList.add('on'); if (k == idx) el.classList.add(hold ? 'warn' : 'now'); }, 250 * k + 150); });
