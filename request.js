@@ -100,7 +100,7 @@ $('#ok').onclick = async () => {
 };
 const finish = () => { show(false); form.reset(); form.classList.remove('tried'); $('#copy').textContent = 'Copy reference no.'; };
 $('#copy').onclick = () => { navigator.clipboard && navigator.clipboard.writeText($('#ref').textContent); $('#copy').textContent = 'Copied!'; };
-$('#fin').onclick = () => { finish(); location.href = 'index.html'; };
+$('#fin').onclick = () => { finish(); location.href = './'; };
 $('#gotrack').onclick = () => { try { sessionStorage.setItem('ref', $('#ref').textContent); } catch (e) {} finish(); location.href = 'track.html'; };
 form.addEventListener('reset', () => { consent = false; note(''); sy.setCustomValidity(''); setTimeout(sync); });
 

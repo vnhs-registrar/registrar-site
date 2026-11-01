@@ -11,13 +11,13 @@ const TOP = `<div class="top"><div>
   <span>${SCHOOL}</span>
 </div></div>
 <nav><div>
-  <a class="brand" href="index.html"><img src="logo.png" alt="" width="42" height="42" decoding="async" onerror="this.remove()"><span>VNHS-SHS REGISTRAR</span></a>
+  <a class="brand" href="./"><img src="logo.png" alt="" width="42" height="42" decoding="async" onerror="this.remove()"><span>VNHS-SHS REGISTRAR</span></a>
   <ul>
-    <li><a href="index.html">Home</a></li>
+    <li><a href="./">Home</a></li>
     <li><a href="request.html">Request a Form</a></li>
     <li><a href="track.html">Track Request</a></li>
     <li><a href="request.html#requirements">Requirements</a></li>
-    <li><a href="index.html#faq">FAQs</a></li>
+    <li><a href="./#faq">FAQs</a></li>
     <li><a href="#contact">Contact Us</a></li>
   </ul>
   <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
@@ -28,7 +28,7 @@ const FOOT = `<footer class="foot" id="contact">
     <div><strong>VNHS-SHS REGISTRAR</strong><p>${SCHOOL}<br>${ADDRESS}</p></div>
     <div><h4>Get in touch</h4><p><a href="tel:${TEL}">${PHONE}</a><br><a href="mailto:${EMAIL}">${EMAIL}</a></p></div>
     <div><h4>Quick links</h4>
-      <ul><li><a href="request.html">Request a Form</a></li><li><a href="track.html">Track a Request</a></li><li><a href="request.html#requirements">Requirements</a></li><li><a href="index.html#faq">FAQs</a></li></ul></div>
+      <ul><li><a href="request.html">Request a Form</a></li><li><a href="track.html">Track a Request</a></li><li><a href="request.html#requirements">Requirements</a></li><li><a href="./#faq">FAQs</a></li></ul></div>
   </div>
   <div class="copy">&copy; <span id="yr"></span> ${SCHOOL}. All rights reserved. &nbsp;&middot;&nbsp; <a class="pread" href="#">Data Privacy Notice</a></div>
 </footer>`;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mark = () => {
     const here = (location.pathname.split('/').pop() || 'index').replace('.html', ''), h = location.hash.slice(1);
     $$('nav li a').forEach(a => {
-      const [file, hash] = a.getAttribute('href').split('#'), f = file.replace('.html', '');
+      const [file, hash] = a.getAttribute('href').split('#'), f = file.replace('.html', '').replace(/^\.\/?$/, 'index');
       a.classList.toggle('on', hash ? h == hash && (!f || f == here) : f == here && !['faq', 'requirements'].includes(h));
     });
   };
