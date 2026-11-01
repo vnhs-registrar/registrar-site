@@ -6,6 +6,10 @@ const PHONE = '0917-144-5973', TEL = '09171445973', EMAIL = 'valencianationalshs
   ADDRESS = 'Lapu-Lapu St., Poblacion, Valencia City, Bukidnon, 8709', SCHOOL = 'Valencia National High School - Senior High School';
 document.documentElement.classList.add('js');
 
+// On a real website the pages open as /request and /track (no .html). On your own computer (VS Code Live Server) the .html ending is kept so they still open.
+const CLEAN = window.CLEAN_URLS ?? (location.protocol === 'https:' && !/^(localhost|127\.|\[)/.test(location.hostname));
+const clean = h => CLEAN ? h.replace(/\b(request|track)\.html/g, '$1') : h;
+
 const TOP = `<div class="top"><div>
   <span><a href="tel:${TEL}">${PHONE}</a> &nbsp;|&nbsp; <a href="mailto:${EMAIL}">${EMAIL}</a></span>
   <span>${SCHOOL}</span>
@@ -64,7 +68,7 @@ const PRIVACY = `<div class="ov" id="pov"><div class="dlg pdlg" role="dialog" ar
 </div></div>`;
 
 // The top bar and menu are written exactly where this script sits, so the page never jumps
-document.currentScript.insertAdjacentHTML('beforebegin', TOP);
+document.currentScript.insertAdjacentHTML('beforebegin', clean(TOP));
 
 // Data Privacy Notice window. Other pages call Site.privacy(true) to ask for agreement; the footer link opens it read-only.
 const privacy = (on, read) => {
@@ -75,10 +79,11 @@ const privacy = (on, read) => {
   pb.scrollTop = 0; atEnd(); pb.focus();
 };
 const atEnd = () => { const pb = $('#pbody'); $('#pagree').disabled = pb.scrollHeight - pb.scrollTop - pb.clientHeight > 12; };
-window.Site = {privacy};
+window.Site = {privacy, url: n => CLEAN ? n : n + '.html'};
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.insertAdjacentHTML('beforeend', FOOT + PRIVACY);
+  document.body.insertAdjacentHTML('beforeend', clean(FOOT) + PRIVACY);
+  if (CLEAN) $$('a[href]').forEach(a => a.setAttribute('href', clean(a.getAttribute('href'))));
   $('#yr').textContent = new Date().getFullYear();
 
   // highlight the current page in the menu
